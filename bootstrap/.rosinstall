@@ -1,0 +1,13 @@
+- git:
+    local-name: rover_launch_files
+    uri: https://github.com/AlessioMorale/rover_launch_files
+    version: master
+- git:
+    local-name: librealsense
+    uri: https://github.com/AlessioMorale/librealsense.git
+    version: amorale/various_fixes
+- git:
+    local-name: realsense
+    uri: https://github.com/intel-ros/realsense.git
+    version: 1.8.1
+
