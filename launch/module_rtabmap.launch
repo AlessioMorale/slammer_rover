@@ -1,8 +1,11 @@
 <?xml version="1.0"?>
 <launch>
+  <arg name="use_pointcloud_to_depthimage" default="false"/>
   <include file="$(find rtabmap_ros)/launch/rtabmap.launch">
     <arg name="args" default="--delete_db_on_start"/>
-    <arg name="depth_topic" default="/camera/depth/points/image_raw"/>
+    <arg if="$(arg use_pointcloud_to_depthimage)" name="depth_topic" default="/camera/depth/points/image_raw"/>
+    <arg unless="$(arg use_pointcloud_to_depthimage)" name="depth_topic" default="/camera/depth_registered/sw_registered/image_rect_raw"/>
     <arg name="rtabmapviz" default="false"/>
   </include>
+
 </launch>

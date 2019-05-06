@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
 <launch>
+<arg name="use_pointcloud_to_depthimage" default="false"/>
 <include file="$(find rover_launch_files)/launch/module_realsense.launch"/>
 <include file="$(find rover_launch_files)/launch/module_rtabmap.launch"/>
 </launch>
