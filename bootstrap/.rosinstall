@@ -10,4 +10,13 @@
     local-name: realsense
     uri: https://github.com/intel-ros/realsense.git
     version: 1.8.1
+- git:
+    local-name: cartographer
+    uri: https://github.com/googlecartographer/cartographer.git
+    version: master
+- git:
+    local-name: cartographer_ros
+    uri: https://github.com/googlecartographer/cartographer_ros.git
+    version: master
+
 
