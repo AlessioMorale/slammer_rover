@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<launch>
+  <include file="$(find rtabmap_ros)/launch/rtabmap.launch">
+    <arg name="args" default="--delete_db_on_start"/>
+    <arg name="depth_topic" default="/camera/depth/points/image_raw"/>
+    <arg name="rtabmapviz" default="false"/>
+  </include>
+</launch>

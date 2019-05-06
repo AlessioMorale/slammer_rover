@@ -1,4 +1,5 @@
 <?xml version="1.0"?>
 <launch>
 <include file="$(find rover_launch_files)/launch/module_realsense.launch"/>
+<include file="$(find rover_launch_files)/launch/module_rtabmap.launch"/>
 </launch>
