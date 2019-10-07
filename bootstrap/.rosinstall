@@ -22,3 +22,7 @@
     local-name: unav2_ros
     uri: git@gitlab.com:unav2/unav2_ros.git
     version: master
+- git:
+    local-name: ros_signalling
+    uri: git@github.com:AlessioMorale/ros_signalling.git
+    version: master
