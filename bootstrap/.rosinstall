@@ -18,5 +18,7 @@
     local-name: cartographer_ros
     uri: https://github.com/googlecartographer/cartographer_ros.git
     version: master
-
-
+- git:
+    local-name: unav2_ros
+    uri: git@gitlab.com:unav2/unav2_ros.git
+    version: master
