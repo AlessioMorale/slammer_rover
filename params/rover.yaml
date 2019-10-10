@@ -1,0 +1,45 @@
+joy_node:
+  auto_repeat_rate: 30
+  coalesce_interval: 0.0333
+  deadzone: 0.01
+
+teleop:
+  drive:
+    type: topic
+    message_type: geometry_msgs/Twist
+    topic_name: /velocity_controller/cmd_vel
+    axis_mappings:
+      - axis: 1
+        target: linear.x
+        scale: 0.6
+      - axis: 2
+        target: angular.z
+        scale: 0.6
+  start_recording:
+    type: service
+    service_name: /recording
+    service_request:
+      status: True
+    buttons: [2]
+  stop_recording:
+    type: service
+    service_name: /recording
+    service_request:
+      status: False
+    buttons: [1]
+
+ina219:
+  device: "/dev/i2c-1"
+  address: 68
+  rshunt: 0.1
+  calibration: 4096
+  # POWER_SUPPLY_TECHNOLOGY_UNKNOWN = 0
+  # POWER_SUPPLY_TECHNOLOGY_NIMH = 1
+  # POWER_SUPPLY_TECHNOLOGY_LION = 2
+  # POWER_SUPPLY_TECHNOLOGY_LIPO = 3
+  # POWER_SUPPLY_TECHNOLOGY_LIFE = 4
+  # POWER_SUPPLY_TECHNOLOGY_NICD = 5
+  # POWER_SUPPLY_TECHNOLOGY_LIMN = 6
+  technology: 3
+  capacity: 2200
+  cells: 2

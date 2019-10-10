@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<launch>
+<!-- 
+    H = 80mm
+center to realsense = 140,20
+center to rplidar = 40,100
+-->
+    <node pkg="tf" type="static_transform_publisher" name="camera_link" args="0 0.140 0.020 0 0 0  base_link camera_link 100" />
+    <node pkg="tf" type="static_transform_publisher" name="laser" args="0 -0.040 0.14 3.1415 0 0 base_link laser 100" />
+    
+</launch>

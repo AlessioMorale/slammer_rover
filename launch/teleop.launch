@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- params -->
+  <rosparam command="load" file="$(find jetracer_ros)/parameters/parameters.yaml" /> -->
+
+  <!-- nodes -->
+  <node name="joy_node" pkg="joy" type="joy_node" respawn="true" />
+  <node name="joy_teleop" pkg="joy_teleop" type="joy_teleop.py" />
+ </launch>

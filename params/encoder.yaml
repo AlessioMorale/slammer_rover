@@ -1,0 +1,27 @@
+!!python/object/new:dynamic_reconfigure.encoding.Config
+dictitems:
+  channels: 2
+  cpr: 11
+  groups: !!python/object/new:dynamic_reconfigure.encoding.Config
+    dictitems:
+      channels: 2
+      cpr: 11
+      groups: !!python/object/new:dynamic_reconfigure.encoding.Config
+        state: []
+      has_z_index: false
+      id: 0
+      invert0: true
+      invert1: true
+      name: Default
+      parameters: !!python/object/new:dynamic_reconfigure.encoding.Config
+        state: []
+      parent: 0
+      position: 1
+      state: true
+      type: ''
+    state: []
+  has_z_index: false
+  invert0: true
+  invert1: true
+  position: 1
+state: []
