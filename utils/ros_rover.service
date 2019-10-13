@@ -1,0 +1,10 @@
+[Unit]
+Description=Slammer ROS services
+
+[Service]
+Type=forking
+ExecStart=*startup_scripts*/startup_launch
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
