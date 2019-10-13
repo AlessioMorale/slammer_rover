@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<launch>
+<include file="$(find rover_launch_files)/launch/battery.launch"/>
+<node pkg="ros_signalling_ws2812" type="node" name="ws2812" />
+<include file="$(find rover_launch_files)/launch/tf.launch"/>
+<include file="$(find rover_launch_files)/launch/teleop.launch"/>
+<include file="$(find rover_launch_files)/launch/control.launch"/>
+</launch>

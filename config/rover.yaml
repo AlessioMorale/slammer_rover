@@ -2,19 +2,20 @@ joy_node:
   auto_repeat_rate: 30
   coalesce_interval: 0.0333
   deadzone: 0.01
+  dev: /dev/input/js0
 
 teleop:
   drive:
     type: topic
     message_type: geometry_msgs/Twist
-    topic_name: /velocity_controller/cmd_vel
+    topic_name: /joy_teleop/cmd_vel
     axis_mappings:
       - axis: 1
         target: linear.x
-        scale: 0.6
+        scale: 0.5
       - axis: 2
         target: angular.z
-        scale: 0.6
+        scale: 3.14
   start_recording:
     type: service
     service_name: /recording
@@ -31,7 +32,7 @@ teleop:
 ina219:
   device: "/dev/i2c-1"
   address: 68
-  rshunt: 0.1
+  rshunt: 0.002
   calibration: 4096
   # POWER_SUPPLY_TECHNOLOGY_UNKNOWN = 0
   # POWER_SUPPLY_TECHNOLOGY_NIMH = 1
@@ -42,4 +43,4 @@ ina219:
   # POWER_SUPPLY_TECHNOLOGY_LIMN = 6
   technology: 3
   capacity: 2200
-  cells: 2
+  cells: 3
