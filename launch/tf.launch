@@ -10,5 +10,4 @@ center to rplidar = 40,100
     <node pkg="tf" type="static_transform_publisher" name="base_link_to_laser" args="0 -0.040 0.14 3.1415 0 0 base_link laser 100" />
     <node pkg="tf" type="static_transform_publisher" name="base_link_to_imu_bosch" args="-0.05 -0.08 0.0 3.1415 0.0 0.0 base_link imu_bosch_link 100" />
     <node pkg="tf" type="static_transform_publisher" name="base_link_to_link_chassis" args="0 0 0.0 0.0 0.0 0.0 base_link link_chassis 100" />
-    <node pkg="tf" type="static_transform_publisher" name="chassis_link_to_link_chassis" args="0 0 0.0 0.0 0.0 0.0 chassis_link link_chassis 100" />
 </launch>

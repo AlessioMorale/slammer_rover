@@ -6,6 +6,6 @@ sed -i 's|\*rosws\*|'"`rospack find rosbash`/../.."'|g' ~/startup_scripts/startu
 sudo cp ./ros_rover.service /lib/systemd/system/
 sudo sed -i 's|\*startup_scripts\*|'`echo ~/startup_scripts`'|g' /lib/systemd/system/ros_rover.service
 sudo systemctl daemon-reload
-#sudo systemctl enable rover.service
-#sudo systemctl start rover.service
-#sudo systemctl status rover.service
+sudo systemctl enable ros_rover.service
+sudo systemctl start ros_rover.service
+sudo systemctl status ros_rover.service

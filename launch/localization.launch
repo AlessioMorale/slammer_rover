@@ -37,16 +37,16 @@ THE SOFTWARE.
 		<param name="imu0" value="/imu/data" />
 		
 		<!--                             x     y     z      r      p      y      x'     y'    z'     r'     p'    y'     x''    y''    z''  -->
-		<rosparam param="odom0_config">[true, true, false, false, false, true, true, false, false, false, false, true, false, false, false]</rosparam>
-        <rosparam param="odom1_config">[true, true, true, false, false, false, true, true, true, false, false, false, false, false, false]</rosparam> 
-		<rosparam param="imu0_config"> [false, false, false, false, false, true, false, false, false, false, false, true, true, false, false]</rosparam>
+		<rosparam param="odom0_config">[false, false, false, false, false, false, true, false, false, false, false, false, false, false, false]</rosparam>
+        <rosparam param="odom1_config">[true, true, true,  true, true, true,  false, false, false, false, false, false, false, false, false]</rosparam> 
+		<rosparam param="imu0_config"> [false, false, false, true, true, true, false, false, false, true, true, true, false, false, false]</rosparam>
 
         
 		<param name="odom0_differential"  value="false" />
-        <param name="odom1_differential"  value="true" />
+        <param name="odom1_differential"  value="false" />
 		<param name="imu0_differential"   value="true" />
 
-		<param name="odom0_relative"      value="false" />
+		<param name="odom0_relative"      value="true" />
         <param name="odom1_relative"      value="false" />
 		<param name="imu0_relative"  	  value="false" />
 

@@ -61,7 +61,7 @@ if __name__ == '__main__':
             #Read red
             led.R = 0
             led.G = 0
-            led.B = 128
+            led.B = 64
             led.group = rear
             for i in range(rear_count):
                 led.led = i
@@ -74,11 +74,11 @@ if __name__ == '__main__':
         led.led = 0
         led.msecOn = 50
         led.msecOff = 0
-        if(battery_voltage > 10.5):
+        if(battery_voltage > 10.8):
             led.R = 255
             led.G = 0
             led.B = 0
-        elif battery_voltage >10.2:
+        elif battery_voltage >10.5:
             led.R = 128
             led.G = 255
             led.B = 0

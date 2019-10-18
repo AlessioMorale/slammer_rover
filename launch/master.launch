@@ -4,4 +4,7 @@
 <include file="$(find rover_launch_files)/launch/base.launch"/>
 <include file="$(find rover_launch_files)/launch/perception.launch"/>
 <include file="$(find rover_launch_files)/launch/localization.launch"/>
+<!-- include file="$(find rover_launch_files)/launch/gmapping.launch"/ -->
+<!-- include file="$(find rover_launch_files)/launch/move_base.launch"/ -->
+
 </launch>

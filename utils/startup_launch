@@ -2,4 +2,4 @@ source *rosws*/setup.bash
 source *roverws*/devel/setup.bash
 export ROS_MASTER_URI=http://`hostname`:11311/
 roscore&
-roslaunch rover_launch_files base.launch
+#roslaunch rover_launch_files master_robot.launch
