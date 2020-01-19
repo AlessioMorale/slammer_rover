@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<launch>
+
+    <param name="robot_description" command="$(find xacro)/xacro.py '$(find unav2_hardware)/urdf/m2wr.xacro'"/>
+
+    <!-- Combine joint values -->
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher"/>
+</launch>

@@ -116,6 +116,6 @@ THE SOFTWARE.
             <param name="Optimizer/Robust" type="string" value="true" />
             <param name="RGBD/OptimizeMaxError" type="string" value="0" />
             -->
-        </node> -->
+        </node>
     </group>
 </launch>

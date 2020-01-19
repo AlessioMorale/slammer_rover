@@ -25,7 +25,7 @@
 
     <!-- The RealSense R200 camera driver -->
     <node pkg="nodelet" type="nodelet" name="camera_driver" args="load realsense_camera/R200Nodelet camera_nodelet_manager" respawn="true" output="log">
-      <rosparam file="$(find rover_launch_files)/config/r200_camera_driver_params.yaml" command="load"/>      
+      <rosparam file="$(find slammer_driver)/config/r200_camera_driver_params.yaml" command="load"/>      
       <remap from="color"                    to="rgb" />
     </node>
 

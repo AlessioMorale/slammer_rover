@@ -1,0 +1,7 @@
+<launch>
+    <rosparam command="load" file="$(find slammer_control)/config/control.yaml" />
+    <node pkg="unav2_hardware" type="hardware_node" name="hardware_node">
+      <param name="JointNames" value="joint1,joint2"/>
+    </node>
+    <node name="controller_spawner" pkg="controller_manager" type="spawner" args="joint_publisher velocity_controller" />
+</launch>
