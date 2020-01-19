@@ -4,4 +4,5 @@
 <node pkg="slammer_driver" type="notification.py" name ="notification" />
 <node pkg="slammer_driver" type="oled.py" name ="oled" />
 <node pkg="ros_signalling_ws2812" type="node" name="ws2812" />
+<include file="$(find slammer_driver)/launch/sensors.launch"/>
 </launch>
