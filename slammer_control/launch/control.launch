@@ -1,4 +1,5 @@
 <launch>
+    <include file="$(find slammer_control)/launch/rosserial.launch"/>
     <rosparam command="load" file="$(find slammer_control)/config/control.yaml" />
     <node pkg="unav2_hardware" type="hardware_node" name="hardware_node">
       <param name="JointNames" value="joint1,joint2"/>
