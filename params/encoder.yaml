@@ -5,7 +5,7 @@ dictitems:
   groups: !!python/object/new:dynamic_reconfigure.encoding.Config
     dictitems:
       channels: 2
-      cpr: 11
+      cpr: 4096
       groups: !!python/object/new:dynamic_reconfigure.encoding.Config
         state: []
       has_z_index: false

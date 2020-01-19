@@ -12,10 +12,10 @@ teleop:
     axis_mappings:
       - axis: 1
         target: linear.x
-        scale: 0.5
+        scale: 0.2
       - axis: 2
         target: angular.z
-        scale: 3.14
+        scale: .34
   start_recording:
     type: service
     service_name: /recording

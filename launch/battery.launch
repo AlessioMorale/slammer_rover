@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <launch>
   <!-- params -->
-  <rosparam command="load" file="$(find rover_launch_files)/config/rover.yaml" /> -->
+  <rosparam command="load" file="$(find rover_launch_files)/config/rover.yaml" />
   <!-- nodes -->
   <node pkg="power_ina219" name="ina219_node" type="ina219_node"/>
 </launch>

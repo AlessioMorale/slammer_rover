@@ -23,15 +23,15 @@ dictitems:
       parent: 0
       state: true
       type: ''
-      vel_frequency: 100
-      vel_kaw: 0.0
+      vel_frequency: 250
+      vel_kaw: 0.2
       vel_kd: 0.0
-      vel_ki: 0.0
-      vel_kp: 0.6
+      vel_ki: 0.6
+      vel_kp: 1.0
     state: []
-  vel_frequency: 100
-  vel_kaw: 0.0
+  vel_frequency: 250
+  vel_kaw: 0.2
   vel_kd: 0.0
-  vel_ki: 0.0
-  vel_kp: 0.6
+  vel_ki: 0.6
+  vel_kp: 1.0
 state: []

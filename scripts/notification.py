@@ -56,7 +56,7 @@ if __name__ == '__main__':
             led.B = 0
             for i in range(front_count):
                 led.led = i
-                pub.publish(led)
+                #pub.publish(led)
                 rospy.rostime.wallsleep(0.1)
             #Read red
             led.R = 0
@@ -65,7 +65,7 @@ if __name__ == '__main__':
             led.group = rear
             for i in range(rear_count):
                 led.led = i
-                pub.publish(led)
+                #pub.publish(led)
                 rospy.rostime.wallsleep(0.1)
 
             init = False
@@ -75,16 +75,16 @@ if __name__ == '__main__':
         led.msecOn = 50
         led.msecOff = 0
         if(battery_voltage > 10.8):
-            led.R = 255
+            led.R = 64
             led.G = 0
             led.B = 0
         elif battery_voltage >10.5:
-            led.R = 128
-            led.G = 255
+            led.R = 32
+            led.G = 64
             led.B = 0
         else:
             led.R = 0
-            led.G = 255
+            led.G = 64
             led.B = 0
         pub.publish(led) 
         rospy.rostime.wallsleep(1.0)
