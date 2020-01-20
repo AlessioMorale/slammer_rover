@@ -1,14 +1,67 @@
 <?xml version="1.0" ?>
-<robot name="m2wr" xmlns:xacro="http://www.ros.org/wiki/xacro">
-  
-  <xacro:include filename="$(find unav2_hardware)/urdf/materials.xacro" />
-  <xacro:include filename="$(find unav2_hardware)/urdf/m2wr.gazebo" />
-  <xacro:include filename="$(find unav2_hardware)/urdf/macros.xacro" />
+<robot name="m2wr" 
+  xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:property name="body_lenght" value="0.30"/>
+  <xacro:property name="body_width" value="0.16"/>
+  <xacro:property name="body_height" value="0.055"/>
+  <xacro:property name="body_ground_clearance" value="0.082"/>
+
+  <xacro:property name="total_lenght" value="0.30"/>
+  <xacro:property name="total_width" value="0.30"/>
+  <xacro:property name="total_height" value="0.20"/>
+
+  <xacro:property name="laser_x_displacement" value="0.04"/>
+  <xacro:property name="laser_z_displacement" value="0.095"/>
+  <xacro:property name="laser_height" value="0.055"/>
+  <xacro:property name="laser_radius" value="0.035"/>
+
+  <xacro:property name="wheel_front_x_displacement" value="0.09"/>
+  <xacro:property name="wheel_rear_x_displacement" value="-0.09"/>
+  <xacro:property name="wheel_y_displacement" value="0.12"/>
+  <xacro:property name="wheel_z_displacement" value="-0.02"/>
+
+  <xacro:property name="imu_x_displacement" value="-0.08"/>
+  <xacro:property name="imu_y_displacement" value="-0.05"/>
+  <xacro:property name="imu_z_displacement" value="0.055"/>
+  <xacro:property name="imu_rpy" value="${pi} 0.0 0.0"/>
+
+
+  <xacro:property name="camera_x_displacement" value="0.145"/>
+  <xacro:property name="camera_y_displacement" value="0.0"/>
+  <xacro:property name="camera_z_displacement" value="0.07"/>
+  <xacro:property name="camera_rpy" value="0 -0.2 0"/>
+
+  <xacro:include filename="$(find slammer_description)/urdf/materials.xacro" />
+  <xacro:include filename="$(find slammer_description)/urdf/m2wr.gazebo" />
+  <xacro:include filename="$(find slammer_description)/urdf/macros.xacro" />
+
+  <!-- base link with global collision geometry -->
+  <link name="base_link">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 ${total_height / 2}"/>
+      <geometry>
+        <box size="${total_lenght} ${total_width} ${total_height}"/>
+      </geometry>
+      <material name="invisible_grey"/>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 ${total_height / 2}"/>
+      <geometry>
+        <box size="${total_lenght} ${total_width} ${total_height}"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <!-- chassis/body -->
+  <joint name="base_link_to_link_chassis" type="fixed">
+    <origin xyz="0 0 ${body_ground_clearance}" rpy="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="link_chassis"/>
+  </joint>
 
   <link name="link_chassis">
-    <parent link="base_link"/>
     <!-- pose and inertial -->
-    <pose>0 0 0 0 0 0</pose>
     <inertial>
       <mass value="5"/>
       <origin rpy="0 0 0" xyz="0 0 0.075"/>
@@ -17,51 +70,114 @@
     <!-- body -->
     <collision name="collision_chassis">
       <geometry>
-        <box size="0.36 0.30 0.07"/>
+        <box size="${body_lenght} ${body_width} ${body_height}"/>
       </geometry>
     </collision>
     <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <origin rpy="0 0 0" xyz="0 0 ${body_height / 2}"/>
       <geometry>
-        <box size="0.36 0.30 0.07"/>
+        <box size="${body_lenght} ${body_width} ${body_height}"/>
       </geometry>
-      <material name="blue"/>
+      <material name="transp_white"/>
     </visual>
     <!-- caster front -->
   </link>
-  
-  <link name="sensor_laser">
+
+  <!-- Lidar -->
+  <joint name="link_chassis_to_laser" type="fixed">
+    <origin xyz="${laser_x_displacement} 0 ${laser_z_displacement}" rpy="0 0 0"/>
+    <parent link="link_chassis"/>
+    <child link="laser"/>
+  </joint>
+
+  <link name="laser">
     <inertial>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <mass value="1" />
       <xacro:cylinder_inertia mass="1" r="0.05" l="0.1" />
     </inertial>
-    
+
     <visual>
-      <origin xyz="0 0 0" rpy="0 0 0" />
+      <origin xyz="0 0 ${- laser_z_displacement + body_height + laser_height / 2}" rpy="0 0 0" />
       <geometry>
-        <cylinder radius="0.05" length="0.1"/>
+        <cylinder radius="${laser_radius}" length="${laser_height}"/>
       </geometry>
       <material name="white" />
     </visual>
-    
+
     <collision>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <origin xyz="0 0 ${- laser_z_displacement + body_height + laser_height / 2}" rpy="0 0 0" />
       <geometry>
-        <cylinder radius="0.05" length="0.1"/>
+        <cylinder radius="${laser_radius}" length="${laser_height}"/>
       </geometry>
     </collision>
   </link>
-  
-  <joint name="joint_sensor_laser" type="fixed">
-    <origin xyz="0.15 0 0.05" rpy="0 0 0"/>
-    <parent link="link_chassis"/>
-    <child link="sensor_laser"/>
-  </joint>
-  
+
+  <!-- Wheels -->
   <xacro:link_wheel name="link_right_wheel" />
-  <xacro:joint_wheel name="joint1" child="link_right_wheel" origin_xyz="-0.05 0.40 0" />
-  
+  <xacro:joint_wheel name="joint1" child="link_right_wheel" origin_xyz="${wheel_front_x_displacement} ${wheel_y_displacement} ${wheel_z_displacement}" />
+
   <xacro:link_wheel name="link_left_wheel" />
-  <xacro:joint_wheel name="joint2" child="link_left_wheel" origin_xyz="-0.05 -0.20 0" />
+  <xacro:joint_wheel name="joint2" child="link_left_wheel" origin_xyz="${wheel_front_x_displacement} ${-wheel_y_displacement} ${wheel_z_displacement}" />
+
+  <xacro:link_wheel name="link_rear_right_wheel" />
+  <xacro:joint_static_wheel name="joint3" child="link_rear_right_wheel" origin_xyz="${wheel_rear_x_displacement} ${wheel_y_displacement} ${wheel_z_displacement}" />
+
+  <xacro:link_wheel name="link_rear_left_wheel" />
+  <xacro:joint_static_wheel name="joint4" child="link_rear_left_wheel" origin_xyz="${wheel_rear_x_displacement} ${-wheel_y_displacement} ${wheel_z_displacement}" />
+
+  <!-- IMU -->
+  <joint name="link_chassis_to_imu_bosch" type="fixed">
+    <origin xyz="${imu_x_displacement} ${imu_y_displacement} ${imu_z_displacement}" rpy="${imu_rpy}"/>
+    <parent link="link_chassis"/>
+    <child link="imu_bosch_link"/>
+  </joint>
+
+  <link name="imu_bosch_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.001" length="0.005"/>
+      </geometry>
+      <material name="red" />
+    </visual>
+    <visual>
+      <origin xyz="0.01 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.02 0.001 0.001"/>
+      </geometry>
+      <material name="blue" />
+    </visual>
+  </link>
+  
+  <!-- Camera -->
+  <joint name="link_chassis_to_camera_mount" type="fixed">
+    <origin xyz="${camera_x_displacement} ${camera_y_displacement} ${camera_z_displacement}" rpy="${camera_rpy}"/>
+    <parent link="link_chassis"/>
+    <child link="camera_mount"/>
+  </joint>
+
+  <link name="camera_mount"/>
+  <joint name="camera_mount_to_camera_link" type="fixed">
+    <origin xyz="0 0.0 0.0" rpy="0 0 0"/>
+    <parent link="camera_mount"/>
+    <child link="camera_link"/>
+  </joint>
+
+  <link name="camera_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.01 0.130 0.02"/>
+      </geometry>
+      <material name="blue" />
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.01 0.130 0.02"/>
+      </geometry>
+    </collision>
+  </link>
+
 </robot>
