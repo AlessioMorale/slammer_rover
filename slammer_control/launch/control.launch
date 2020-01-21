@@ -1,8 +1,16 @@
 <launch>
-    <include file="$(find slammer_control)/launch/rosserial.launch"/>
-    <rosparam command="load" file="$(find slammer_control)/config/control.yaml" />
-    <node pkg="unav2_hardware" type="hardware_node" name="hardware_node">
-      <param name="JointNames" value="joint1,joint2"/>
-    </node>
-    <node name="controller_spawner" pkg="controller_manager" type="spawner" args="joint_publisher velocity_controller" />
+  <arg name="port" default="/dev/ttyACM0" />
+  <arg name="msgttl" default="-1" />
+
+  <rosparam command="load" file="$(find slammer_control)/config/control.yaml" />
+  <node pkg="unav2_hardware" type="hardware_node" name="hardware_node">
+    <param name="JointNames" value="joint1,joint2"/>
+  </node>
+  <node name="controller_spawner" pkg="controller_manager" type="spawner" args="joint_publisher velocity_controller" />
+  <node pkg="rosserial_server" type="serial_node" name="rosserial_unav" output="log" respawn="true" respawn_delay="0.5">
+    <param name="port" value="$(arg port)" />
+  </node>
+  <node pkg="unav2_hardware" type="configuration_manager.py" name="unav2_configuration_manager" output="log" respawn="true" respawn_delay="0.5">
+    <param name="msgttl" value="$(arg msgttl)"/>
+  </node>
 </launch>

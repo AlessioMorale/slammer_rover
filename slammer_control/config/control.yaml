@@ -13,15 +13,12 @@ velocity_controller:
 
   cmd_vel_timeout: 0.25
   base_frame_id: chassis_link
-  enable_odom_tf: false
-  estimate_velocity_from_position: false
 
   k_l: 0.1
   k_r: 0.1
 
-  # Odometry fused with IMU is published by robot_localization, so
-  # no need to publish a TF based on encoders alone.
-  enable_odom_tf: false
+  estimate_velocity_from_position: true
+  enable_odom_tf: true
 
   # Wheel separation and radius multipliers
   wheel_separation_multiplier: 1.0 # default: 1.0
