@@ -13,8 +13,12 @@
 
   <xacro:property name="laser_x_displacement" value="0.04"/>
   <xacro:property name="laser_z_displacement" value="0.095"/>
-  <xacro:property name="laser_height" value="0.055"/>
   <xacro:property name="laser_radius" value="0.035"/>
+  <xacro:property name="laser_height" value="0.055"/>
+  <xacro:property name="laser_model_x_disp" value="0.070"/>
+  <xacro:property name="laser_model_y_disp" value="-0.013"/>
+  <xacro:property name="laser_model_z_disp" value="0.032"/>
+
 
   <xacro:property name="wheel_front_x_displacement" value="0.09"/>
   <xacro:property name="wheel_rear_x_displacement" value="-0.09"/>
@@ -98,11 +102,11 @@
     </inertial>
 
     <visual>
-      <origin xyz="0 0 ${- laser_z_displacement + body_height + laser_height / 2}" rpy="0 0 0" />
+      <origin xyz="${-laser_model_x_disp} ${-laser_model_y_disp} ${-laser_model_z_disp}" rpy="${pi/2} 0 ${pi}" />
       <geometry>
-        <cylinder radius="${laser_radius}" length="${laser_height}"/>
+        <mesh filename="package://slammer_description/meshes/sensors/rplidar.stl" scale="0.001 0.001 0.001"/>
       </geometry>
-      <material name="white" />
+      <material name="black" />
     </visual>
 
     <collision>
@@ -149,7 +153,7 @@
       <material name="blue" />
     </visual>
   </link>
-  
+
   <!-- Camera -->
   <joint name="link_chassis_to_camera_mount" type="fixed">
     <origin xyz="${camera_x_displacement} ${camera_y_displacement} ${camera_z_displacement}" rpy="${camera_rpy}"/>
