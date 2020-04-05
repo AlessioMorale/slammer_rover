@@ -4,5 +4,7 @@ port: /dev/serial/by-id/usb-1a86_USB2.0-Serial-if00-port0
 frame_id: imu_bosch_link
 # Data reading frequency
 freqency: 200
+publish_raw: true
+publish_mag: true
 # Sensor operation mode --> modes could be found in sensor datasheet
 operation_mode: 0x08

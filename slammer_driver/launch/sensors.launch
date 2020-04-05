@@ -9,7 +9,7 @@
 
   </include>
   <!-- Run Bosch BNO055 IMU -->
-  <node pkg="bosch_imu_driver" type="bosch_imu_node.py" name="bosch_imu_node" output="screen" respawn="true">
+  <node pkg="bosch_imu_driver" type="bosch_imu_node.py" ns="boschimu" name="bosch_imu_node" output="screen" respawn="true">
     <rosparam file="$(find slammer_driver)/config/imu_bosch.yaml" command="load"/>
   </node>
 </launch>
