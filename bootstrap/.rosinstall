@@ -1,7 +1,11 @@
 - git:
-    local-name: rover_launch_files
-    uri: https://github.com/AlessioMorale/rover_launch_files
-    version: master
+    local-name: bosch_imu_driver
+    uri: git@github.com:AlessioMorale/bosch_imu_driver.git
+    version: amorale/integration
+- git:
+    local-name: ros-power-ina219
+    uri: git@github.com:AlessioMorale/ros-power-ina219.git
+    version: amorale/use_standard_libs
 - git:
     local-name: librealsense
     uri: https://github.com/AlessioMorale/librealsense.git
@@ -11,18 +15,18 @@
     uri: https://github.com/intel-ros/realsense.git
     version: 1.8.1
 - git:
-    local-name: cartographer
-    uri: https://github.com/googlecartographer/cartographer.git
-    version: master
-- git:
-    local-name: cartographer_ros
-    uri: https://github.com/googlecartographer/cartographer_ros.git
-    version: master
-- git:
-    local-name: unav2_ros
-    uri: git@gitlab.com:unav2/unav2_ros.git
-    version: master
-- git:
     local-name: ros_signalling
     uri: git@github.com:AlessioMorale/ros_signalling.git
     version: master
+- git:
+    local-name: rover_launch_files
+    uri: git@github.com:AlessioMorale/rover_launch_files.git
+    version: master
+- git:
+    local-name: unav2_ros
+    uri: git@github.com:AlessioMorale/unav2_ros.git
+    version: master
+- git:
+    local-name: vision_opencv
+    uri: https://github.com/ros-perception/vision_opencv.git
+    version: noetic
