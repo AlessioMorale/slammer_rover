@@ -4,8 +4,8 @@ joint_publisher:
 
 velocity_controller:
   type: "diff_drive_controller/DiffDriveController"
-  left_wheel: ['joint1']
-  right_wheel: ['joint2']
+  left_wheel: ['joint2']
+  right_wheel: ['joint1']
   publish_rate: 50
   pose_covariance_diagonal: [0.001, 0.001, 1000000.0, 1000000.0, 1000000.0, 0.03]
   twist_covariance_diagonal: [0.001, 0.001, 0.001, 1000000.0, 1000000.0, 0.03]
@@ -34,8 +34,6 @@ velocity_controller:
     x:
       has_velocity_limits    : true
       max_velocity           : 1.0   # m/s
-      has_velocity_limits: true
-      max_velocity: 2.0
       has_acceleration_limits: true
       max_acceleration: 1.0
       has_jerk_limits: true
@@ -54,14 +52,14 @@ joint_limits:
     max_velocity           : 1.0   # m/s
     has_velocity_limits: true
     has_acceleration_limits: true
-    max_acceleration: 5.0
+    max_acceleration: 1.0
     has_jerk_limits: true
-    max_jerk: 100.0
+    max_jerk: 0.0
   joint2:
     has_velocity_limits    : true
     max_velocity           : 1.0   # m/s
     has_velocity_limits: true
     has_acceleration_limits: true
-    max_acceleration: 5.0
+    max_acceleration: 1.0
     has_jerk_limits: true
-    max_jerk: 100.0
+    max_jerk: 0.0
