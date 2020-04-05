@@ -1,11 +1,11 @@
-mkdir -p ~/startup_scripts/
-cp ./startup_launch ~/startup_scripts/ 
-sed -i 's|\*roverws\*|'"`pwd`/../../.."'|g' ~/startup_scripts/startup_launch
-sed -i 's|\*rosws\*|'"`rospack find rosbash`/../.."'|g' ~/startup_scripts/startup_launch
+cd $(dirname "$0")
+sudo -H pip3 install supervisor ds4drv
 
-sudo cp ./ros_rover.service /lib/systemd/system/
-sudo sed -i 's|\*startup_scripts\*|'`echo ~/startup_scripts`'|g' /lib/systemd/system/ros_rover.service
+sudo adduser "$USER" i2c
+sudo adduser "$USER" gpio
+sudo cp ./supervisord.conf /etc/supervisord.conf
+sudo cp ./supervisord.service /lib/systemd/system/
 sudo systemctl daemon-reload
-sudo systemctl enable ros_rover.service
-sudo systemctl start ros_rover.service
-sudo systemctl status ros_rover.service
+sudo systemctl enable supervisord.service
+sudo systemctl start supervisord.service
+sudo systemctl status supervisord.service

@@ -1,9 +1,9 @@
 [Unit]
-Description=Slammer ROS services
+Description=Supervisord services
 
 [Service]
 Type=forking
-ExecStart=*startup_scripts*/startup_launch
+ExecStart=/usr/local/bin/supervisord
 Restart=on-failure
 
 [Install]
