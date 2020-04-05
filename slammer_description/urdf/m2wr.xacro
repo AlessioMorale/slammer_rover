@@ -28,7 +28,7 @@
   <xacro:property name="imu_x_displacement" value="-0.08"/>
   <xacro:property name="imu_y_displacement" value="-0.05"/>
   <xacro:property name="imu_z_displacement" value="0.055"/>
-  <xacro:property name="imu_rpy" value="${pi} 0.0 0.0"/>
+  <xacro:property name="imu_rpy" value="0.0 0.0 0.0"/>
 
 
   <xacro:property name="camera_x_displacement" value="0.145"/>
@@ -89,7 +89,7 @@
 
   <!-- Lidar -->
   <joint name="link_chassis_to_laser" type="fixed">
-    <origin xyz="${laser_x_displacement} 0 ${laser_z_displacement}" rpy="0 0 0"/>
+    <origin xyz="${laser_x_displacement} 0 ${laser_z_displacement}" rpy="0 0 ${pi}"/>
     <parent link="link_chassis"/>
     <child link="laser"/>
   </joint>
