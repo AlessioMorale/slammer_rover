@@ -1,0 +1,20 @@
+# Configuration Settings for C94-M8P device
+
+debug: 4                   # Range 0-4 (0 means no debug statements will print)
+
+device: /dev/ttyUSB1
+frame_id: imu_bosch_link 
+rate: 4                     # in Hz
+nav_rate: 4                 # [# of measurement cycles], recommended 1 Hz, may 
+                            # be either 5 Hz (Dual constellation) or 
+uart1:
+  baudrate: 115200           # C94-M8P specific
+  out: 1
+#  in: 7
+publish:
+  all: true
+  esf: true
+  aid:
+    hui: false
+  nav:
+    posecef: false

@@ -1,64 +1,12 @@
-<!--
- r200_camera.launch
-
- Copyright (C) 2017 Alessandro Francescon
- 
- This program is free software: you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation, either version 3 of the License.
- 
- This program is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
- 
- You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
--->
 
 <launch>
+    <include file="$(find realsense_camera)/launch/r200_nodelet_rgbd.launch"/>
 
-  <group ns="camera">
-
-    <!-- The nodelet manager -->
-    <node pkg="nodelet" type="nodelet" name="camera_nodelet_manager" args="manager" respawn="true" output="log"/>
-
-    <!-- The RealSense R200 camera driver -->
-    <node pkg="nodelet" type="nodelet" name="camera_driver" args="load realsense_camera/R200Nodelet camera_nodelet_manager" respawn="true" output="log">
-      <rosparam file="$(find slammer_driver)/config/r200_camera_driver_params.yaml" command="load"/>      
-      <remap from="color"                    to="rgb" />
+    <node name="depthimage_to_laserscan" pkg="depthimage_to_laserscan" type="depthimage_to_laserscan" output="screen">
+        <remap from="image" to="/camera/depth/image_raw"/>
+        <remap from="camera_info" to="/camera/depth/camera_info"/>
+        <param name="output_frame_id" value="camera_link" />
+        <param name="scan_height" value="5" />
+        <remap from="scan" to="/camera/scan"/>
     </node>
-
-    <!-- The image rectifier: from image raw provide rectified depth image -->
-    <node pkg="nodelet" type="nodelet" name="depth_rectify" args="load image_proc/rectify camera_nodelet_manager" respawn="true" output="log">
-      <remap from="image_mono"               to="depth/image_raw" />
-      <remap from="image_rect"               to="depth/image_rectified" />
-      <!-- Use nearest neighbor (0) interpolation so we don't streak across depth boundaries -->
-      <param name="interpolation"            value="0" />
-    </node>
-
-    <!-- The depth image register: from rectified depth image provide registered depth image (i.e. the depth image projected
-         on RGB camera frame -->
-    <node pkg="nodelet" type="nodelet" name="depth_register" args="load depth_image_proc/register camera_nodelet_manager" respawn="true" output="log">
-      <param name="queue_size"               type="int"  value="5" />
-      <remap from="rgb/camera_info"          to="rgb/camera_info" />
-      <remap from="depth/camera_info"        to="depth/camera_info" />
-      <remap from="depth/image_rect"         to="depth/image_rectified" />
-      <remap from="depth_registered/image_rect" to="depth_registered/image_rectified" />
-    </node>
-
-    <!-- The image rectifier: from rgb image raw provide rgb rectified image -->
-    <node pkg="nodelet" type="nodelet" name="rgb_rectify" args="load image_proc/rectify camera_nodelet_manager" respawn="true" output="log">
-      <remap from="image_mono"               to="rgb/image_raw" />
-      <remap from="image_rect"               to="rgb/image_rectified" />
-    </node>
-    <!-- <node pkg="nodelet" type="nodelet" name="rgbd_sync" args="standalone rtabmap_ros/rgbd_sync camera_nodelet_manager" output="screen">
-      <remap from="rgb/image"       to="/camera/rgb/image_raw"/>
-      <remap from="depth/image"     to="/camera/depth_registered/sw_registered/image_rect_raw"/>
-      <remap from="rgb/camera_info" to="/camera/rgb/camera_info"/>
-      <remap from="rgbd_image"      to="rgbd_image"/> 
-      <param name="approx_sync"       value="false"/> 
-    </node> -->
-  </group>
-
 </launch>
