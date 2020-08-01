@@ -1,0 +1,46 @@
+map_frame: map
+odom_frame: odom
+base_link_frame: base_link
+world_frame: odom
+
+frequency: 50
+
+# Sensor configuration http://docs.ros.org/melodic/api/robot_localization/html/state_estimation_nodes.html#sensor-config
+#        X,         Y,        Z,
+#     roll,     pitch,      yaw,
+#    dot X,     dot Y,    dot Z,
+# dot roll, dot pitch,  dot yaw,
+# dotdot X,  dotdot Y, dotdot Z
+
+################ ODOM0 ################
+
+odom0: velocity_controller/odom
+odom0_config: [false, false, false,
+               false, false, false,
+               true, false, false,
+               false, false, false,
+               false, false, false]
+
+odom0_queue_size: 10
+odom0_nodelay: true
+odom0_differential: true
+odom0_relative: false
+
+odom0_pose_rejection_threshold: 5.0
+odom0_twist_rejection_threshold: 5.0
+
+################ IMU0 ################
+
+imu0: boschimu/imu/data
+imu0_config: [false, false, false,
+              false, false, false,
+              false, false, false,
+              true, true, true,
+              true, true, true]
+
+imu0_differential: true
+imu0_relative: false
+
+imu0_queue_size: 10
+imu0_remove_gravitational_acceleration: true
+
