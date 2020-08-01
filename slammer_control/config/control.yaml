@@ -12,13 +12,13 @@ velocity_controller:
   
 
   cmd_vel_timeout: 0.25
-  base_frame_id: chassis_link
+  base_frame_id: base_link
 
   k_l: 0.1
   k_r: 0.1
 
-  estimate_velocity_from_position: true
-  enable_odom_tf: true
+  estimate_velocity_from_position: false
+  enable_odom_tf: false
 
   # Wheel separation and radius multipliers
   wheel_separation_multiplier: 1.0 # default: 1.0
@@ -33,7 +33,7 @@ velocity_controller:
   linear:
     x:
       has_velocity_limits    : true
-      max_velocity           : 1.0   # m/s
+      max_velocity           : 0.3   # m/s
       has_acceleration_limits: true
       max_acceleration: 1.0
       has_jerk_limits: true

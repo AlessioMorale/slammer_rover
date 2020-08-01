@@ -24,14 +24,14 @@ dictitems:
       state: true
       type: ''
       vel_frequency: 250
-      vel_kaw: 0.2
+      vel_kaw: 0.0
       vel_kd: 0.0
-      vel_ki: 0.6
-      vel_kp: 1.0
+      vel_ki: 0.4
+      vel_kp: 0.8
     state: []
   vel_frequency: 250
-  vel_kaw: 0.2
+  vel_kaw: 0.0
   vel_kd: 0.0
-  vel_ki: 0.6
-  vel_kp: 1.0
+  vel_ki: 0.4
+  vel_kp: 0.8
 state: []

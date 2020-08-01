@@ -9,13 +9,13 @@ dictitems:
       parameters: !!python/object/new:dynamic_reconfigure.encoding.Config
         state: []
       parent: 0
-      ratio: 100.0
+      ratio: 75.0
       rotation0: false
       rotation1: true
       state: true
       type: ''
     state: []
-  ratio: 100.0
+  ratio: 75.0
   rotation0: false
   rotation1: true
 state: []
