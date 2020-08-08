@@ -1,15 +1,5 @@
 <launch>
-  <node name="rplidarNode" pkg="rplidar_ros" type="rplidarNode" output="screen" respawn="true">
-    <param name="serial_port" type="string" value="/dev/serial/by-id/usb-Silicon_Labs_CP2102_USB_to_UART_Bridge_Controller_0001-if00-port0"/>
-    <param name="serial_baudrate" type="int" value="115200"/>
-    <param name="frame_id" type="string" value="laser"/>
-    <param name="diagnostics_frequency" value="1.0" />
-  </node>
-  <include file="$(find slammer_driver)/launch/r200_camera.launch">
-
-  </include>
-  <!-- Run Bosch BNO055 IMU -->
-  <node pkg="bosch_imu_driver" type="bosch_imu_node.py" ns="boschimu" name="bosch_imu_node" output="screen" respawn="true">
-    <rosparam file="$(find slammer_driver)/config/imu_bosch.yaml" command="load"/>
-  </node>
+  <include file="$(find slammer_driver)/launch/rplidar.launch" />
+  <include file="$(find slammer_driver)/launch/r200_camera.launch" />
+  <include file="$(find slammer_driver)/launch/imu.launch" />
 </launch>
