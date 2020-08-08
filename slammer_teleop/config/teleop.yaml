@@ -1,10 +1,24 @@
 joy_node:
-  auto_repeat_rate: 30
+  auto_repeat_rate: 20
   coalesce_interval: 0.0333
   deadzone: 0.01
   dev: /dev/input/js0
 
 teleop:
+  default:
+    type: topic
+    message_type: geometry_msgs/Twist
+    topic_name: cmd_velDummy
+    message_value:
+      -
+        target: linear.x
+        value: 0.0
+      -
+        target: angular.z
+        value: 0.0
+      -
+        target: linear.y
+        value: 0.0
   drive:
     type: topic
     message_type: geometry_msgs/Twist
@@ -12,19 +26,27 @@ teleop:
     axis_mappings:
       - axis: 1
         target: linear.x
-        scale: 0.2
+        scale: 0.1
       - axis: 2
         target: angular.z
-        scale: .34
-  start_recording:
-    type: service
-    service_name: /recording
-    service_request:
-      status: True
-    buttons: [2]
-  stop_recording:
-    type: service
-    service_name: /recording
-    service_request:
-      status: False
-    buttons: [1]
+        scale: .25
+
+twist_mux:
+  topics:
+  - name    : joy
+    topic   : joy_teleop/cmd_vel
+    timeout : 0.5
+    priority: 100
+  - name    : move_base
+    topic   : move_base/cmd_vel
+    timeout : 0.5
+    priority: 10
+
+  locks:
+  - name    : manual
+    topic   : /joy_priority
+    timeout : 0.0    
+    priority: 100  
+
+joystick_relay:
+  priority: True
