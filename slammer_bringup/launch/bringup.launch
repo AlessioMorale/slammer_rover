@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<launch>
+<arg name="use_pointcloud_to_depthimage" default="false"/>
+<include file="$(find slammer_description)/launch/description.launch"/>
+<include file="$(find slammer_driver)/launch/driver.launch"/>
+<include file="$(find slammer_teleop)/launch/teleop.launch"/>
+<include file="$(find slammer_control)/launch/control.launch"/>
+<include file="$(find slammer_mapping)/launch/mapping.launch"/>
+</launch>
