@@ -1,7 +1,6 @@
 # Backup of sudoers file and change the backup file.
 sudo cp /etc/sudoers /tmp/sudoers.bak
-echo "$USER ALL=(ALL) NOPASSWD:/sbin/shutdown, /sbin/reboot
-" | sudo tee -a /tmp/sudoers.bak > /dev/null
+echo "$USER ALL=(ALL) NOPASSWD:/sbin/shutdown, /sbin/reboot" | sudo tee -a /tmp/sudoers.bak > /dev/null
 
 # Check syntax of the backup file to make sure it is correct.
 sudo visudo -cf /tmp/sudoers.bak > /dev/null
