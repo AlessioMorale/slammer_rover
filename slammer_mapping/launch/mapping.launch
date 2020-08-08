@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <launch>
-    <include file="$(find slammer_mapping)/launch/hector_mapping.launch"/>
+    <!-- include file="$(find slammer_mapping)/launch/hector_mapping.launch"/ -->
     <include file="$(find slammer_mapping)/launch/localization.launch" />
+    <!-- include file="$(find slammer_mapping)/launch/rtabmap.launch" / -->
     <!-- include file="$(find slammer_mapping)/launch/mapserver.launch"/ -->
 </launch>

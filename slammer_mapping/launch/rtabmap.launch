@@ -1,0 +1,76 @@
+<launch>
+  <arg name="frame_id"                default="base_link" />
+  <arg name="rgb_topic"               default="/camera/rgb/image_rect_color" />
+  <arg name="depth_topic"             default="/camera/depth_registered/sw_registered/image_rect_raw" />
+  <arg name="camera_info_topic"       default="/camera/rgb/camera_info" />
+  <arg name="odom_topic" default="/odometry/filtered" />
+  <arg name="visual_odom_active" default="false"/>
+  <arg name="v_odom_topic" default="/odometry/vis_odom" />
+  <arg name="scan_topic" default="/scan" />
+
+  <!-- Localization-only mode -->
+  <arg name="localization"      default="false"/>
+  <arg     if="$(arg localization)" name="rtabmap_args"  default=""/>
+  <arg unless="$(arg localization)" name="rtabmap_args"  default="--delete_db_on_start"/>  
+  <group ns="rtabmap">
+    <!--  Visual Odometry -->
+    <node if="$(arg visual_odom_active)" pkg="rtabmap_ros" type="rgbd_odometry" name="visual_odometry" output="screen" args="$(arg rtabmap_args)">
+      <remap from="rgb/image"       to="$(arg rgb_topic)"/>
+      <remap from="depth/image"     to="$(arg depth_topic)"/>
+      <remap from="rgb/camera_info" to="$(arg camera_info_topic)"/>
+      <remap from="odom"            to="$(arg v_odom_topic)"/>
+
+      <param name="frame_id"               type="string" value="$(arg frame_id)"/>
+      <param name="publish_tf"             type="bool"   value="false"/>
+      <param name="publish_null_when_lost" type="bool"   value="true"/>
+      <param name="guess_from_tf"          type="bool"   value="true"/>
+
+      <param name="Odom/FillInfoData"      type="string" value="true"/>
+      <param name="Odom/ResetCountdown"    type="string" value="1"/>
+      <param name="Vis/FeatureType"        type="string" value="6"/> 
+      <param name="OdomF2M/MaxSize"        type="string" value="1000"/>
+    </node>
+    <!-- SLAM -->
+    <node name="rtabmap" pkg="rtabmap_ros" type="rtabmap" output="screen" args="$(arg rtabmap_args)">
+      <param name="frame_id"        type="string" value="$(arg frame_id)"/>
+      <param name="subscribe_scan" type="bool" value="true"/>
+
+      <remap from="rgb/image"       to="$(arg rgb_topic)"/>
+      <remap from="depth/image"     to="$(arg depth_topic)"/>
+      <remap from="rgb/camera_info" to="$(arg camera_info_topic)"/>
+      <remap from="odom"            to="/odometry/filtered"/>
+      <remap from="scan" to="$(arg scan_topic)"/>
+
+	    <param name="landmark_linear_variance" type="double" value="0.1"/>
+	    <param name="landmark_angular_variance" type="double" value="0.5"/>
+
+      <param name="Kp/DetectorStrategy"    type="string" value="6"/> <!-- use same features as odom -->
+      <!-- RTAB-Map's parameters: do "rosrun rtabmap rtabmap (double-dash)params" to see the list of available parameters. -->
+      <param name="RGBD/NeighborLinkRefining" type="string" value="true"/>  <!-- Do odometry correction with consecutive laser scans -->
+      <param name="RGBD/ProximityBySpace"     type="string" value="true"/>  <!-- Proximity detection (using estimated position) with locations in WM -->
+      <param name="Mem/BadSignaturesIgnored"  type="string" value="false"/> <!-- Don't ignore bad images for 3D node creation (e.g. white walls) -->
+      <param name="Reg/Strategy"              type="string" value="1"/>     <!-- Registration strategy: 0=visual, 1=ICP, 2=visual+ICP -->
+      <param name="Icp/CorrespondenceRatio"   type="string" value="0.2"/>
+      <param name="Icp/Iterations"            type="string" value="30"/>
+      <param name="Icp/VoxelSize"             type="string" value="0.025"/>
+      <param name="Vis/MinInliers"            type="string" value="10"/>    <!-- 3D visual words minimum inliers to accept loop closure -->
+      <param name="Vis/MaxDepth"              type="string" value="4.0"/>   <!-- 3D visual words maximum depth 0=infinity -->
+      <param name="Vis/InlierDistance"        type="string" value="0.1"/>   <!-- 3D visual words correspondence distance -->
+      <param name="RGBD/AngularUpdate"        type="string" value="0.01"/>  <!-- Update map only if the robot is moving -->
+      <param name="RGBD/LinearUpdate"         type="string" value="0.01"/>  <!-- Update map only if the robot is moving -->
+      <param name="Mem/RehearsalSimilarity"   type="string" value="0.45"/>
+      <param name="Mem/NotLinkedNodesKept"    type="string" value="false"/>
+      <param name="Optimizer/Slam2D"          type="string" value="false"/>
+      <param name="Reg/Force3DoF"             type="string" value="false"/>   
+      <param name="Grid/3D"            type="string" value="true"/> 
+      <param name="Grid/FromDepth" type="string" value="true"/> 
+      <param name="Rtabmap/TimeThr"           type="string" value="700"/>
+      <param name="Rtabmap/DetectionRate" type="string" value="2"/>
+      <!-- localization mode -->
+      <param name="Mem/InitWMWithAllNodes" type="string" value="$(arg localization)"/> 
+      <param     if="$(arg localization)" name="Mem/IncrementalMemory" type="string" value="false"/>
+      <param unless="$(arg localization)" name="Mem/IncrementalMemory" type="string" value="true"/>
+    </node>
+  </group>
+
+</launch>
