@@ -13,7 +13,7 @@ RUN source /docker-entrypoint.sh && \
     sed 's/git@github.com:/https:\/\/github.com\//' .rosinstall -i && \
     wstool init -j8 src ./.rosinstall && \
     apt-get update && \
-    rosdep install --from-paths src --ignore-src --rosdistro melodic -y --skip-keys='python3-opencv opencv libopencv-dev libopencv rviz' && \
+    rosdep install --from-paths src --ignore-src --rosdistro melodic -y --skip-keys='python3-opencv dkms opencv libopencv-dev libopencv rviz' && \
     rm -rf /ros_melodic_robot/*
 
 # Set up entrypoint

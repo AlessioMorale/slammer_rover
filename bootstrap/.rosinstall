@@ -26,7 +26,3 @@
     local-name: unav2_ros
     uri: git@github.com:AlessioMorale/unav2_ros.git
     version: master
-- git:
-    local-name: vision_opencv
-    uri: https://github.com/ros-perception/vision_opencv.git
-    version: noetic
