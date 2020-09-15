@@ -1,0 +1,4 @@
+#!/bin/bash
+cd ..
+echo building $docker_tag
+docker build -f ./docker/Dockerfile --tag robot-image .
