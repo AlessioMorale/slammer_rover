@@ -34,7 +34,7 @@
   <xacro:property name="camera_x_displacement" value="0.145"/>
   <xacro:property name="camera_y_displacement" value="0.0"/>
   <xacro:property name="camera_z_displacement" value="0.07"/>
-  <xacro:property name="camera_rpy" value="0 0.22 0"/>
+  <xacro:property name="camera_rpy" value="0 0 0"/>
 
   <xacro:include filename="$(find slammer_description)/urdf/materials.xacro" />
   <xacro:include filename="$(find slammer_description)/urdf/m2wr.gazebo" />
