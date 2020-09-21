@@ -8,12 +8,12 @@
     version: amorale/use_standard_libs
 - git:
     local-name: librealsense
-    uri: https://github.com/AlessioMorale/librealsense.git
-    version: amorale/various_fixes
+    uri: https://github.com/IntelRealSense/librealsense.git
+    version: master
 - git:
     local-name: realsense
-    uri: https://github.com/intel-ros/realsense.git
-    version: 1.8.1
+    uri: https://github.com/IntelRealSense/realsense-ros.git
+    version: development
 - git:
     local-name: ros_signalling
     uri: git@github.com:AlessioMorale/ros_signalling.git
@@ -26,3 +26,7 @@
     local-name: unav2_ros
     uri: git@github.com:AlessioMorale/unav2_ros.git
     version: master
+- git:
+    local-name: rgbd_launch
+    uri: https://github.com/ros-gbp/rgbd_launch-release.git
+    version: release/melodic/rgbd_launch/2.2.2-0
