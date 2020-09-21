@@ -1,12 +1,14 @@
 <launch>
   <arg name="frame_id"                default="base_link" />
-  <arg name="rgb_topic"               default="/camera/rgb/image_rect_color" />
-  <arg name="depth_topic"             default="/camera/depth_registered/sw_registered/image_rect_raw" />
-  <arg name="camera_info_topic"       default="/camera/rgb/camera_info" />
+  <arg name="rgb_topic"               default="/camera/color/image_raw" />
+  <arg name="depth_topic"             default="/camera/aligned_depth_to_color/image_raw" />
+  <arg name="camera_info_topic"       default="/camera/color/camera_info" />
   <arg name="odom_topic" default="/odometry/filtered" />
-  <arg name="visual_odom_active" default="false"/>
+  <arg name="approx_sync" default="false" />
+  <arg name="visual_odom_active" default="true"/>
   <arg name="v_odom_topic" default="/odometry/vis_odom" />
   <arg name="scan_topic" default="/scan" />
+  <arg name="imu_topic" default="/boschimu/imu/data" />
 
   <!-- Localization-only mode -->
   <arg name="localization"      default="false"/>
@@ -29,6 +31,8 @@
       <param name="Odom/ResetCountdown"    type="string" value="1"/>
       <param name="Vis/FeatureType"        type="string" value="6"/> 
       <param name="OdomF2M/MaxSize"        type="string" value="1000"/>
+      <param name="imu_topic"          type="string" value="$(arg imu_topic)"/>
+      <param name="wait_imu_to_init"   type="string" value="true"/> 
     </node>
     <!-- SLAM -->
     <node name="rtabmap" pkg="rtabmap_ros" type="rtabmap" output="screen" args="$(arg rtabmap_args)">
@@ -49,7 +53,7 @@
       <param name="RGBD/NeighborLinkRefining" type="string" value="true"/>  <!-- Do odometry correction with consecutive laser scans -->
       <param name="RGBD/ProximityBySpace"     type="string" value="true"/>  <!-- Proximity detection (using estimated position) with locations in WM -->
       <param name="Mem/BadSignaturesIgnored"  type="string" value="false"/> <!-- Don't ignore bad images for 3D node creation (e.g. white walls) -->
-      <param name="Reg/Strategy"              type="string" value="1"/>     <!-- Registration strategy: 0=visual, 1=ICP, 2=visual+ICP -->
+      <param name="Reg/Strategy"              type="string" value="2"/>     <!-- Registration strategy: 0=visual, 1=ICP, 2=visual+ICP -->
       <param name="Icp/CorrespondenceRatio"   type="string" value="0.2"/>
       <param name="Icp/Iterations"            type="string" value="30"/>
       <param name="Icp/VoxelSize"             type="string" value="0.025"/>
@@ -59,13 +63,15 @@
       <param name="RGBD/AngularUpdate"        type="string" value="0.01"/>  <!-- Update map only if the robot is moving -->
       <param name="RGBD/LinearUpdate"         type="string" value="0.01"/>  <!-- Update map only if the robot is moving -->
       <param name="Mem/RehearsalSimilarity"   type="string" value="0.45"/>
-      <param name="Mem/NotLinkedNodesKept"    type="string" value="false"/>
-      <param name="Optimizer/Slam2D"          type="string" value="false"/>
-      <param name="Reg/Force3DoF"             type="string" value="false"/>   
+      <param name="Mem/NotLinkedNodesKept"    type="string" value="true"/>
+      <param name="Optimizer/Slam2D"          type="string" value="true"/>
+      <param name="Reg/Force3DoF"             type="string" value="true"/>   
       <param name="Grid/3D"            type="string" value="true"/> 
       <param name="Grid/FromDepth" type="string" value="true"/> 
-      <param name="Rtabmap/TimeThr"           type="string" value="700"/>
-      <param name="Rtabmap/DetectionRate" type="string" value="2"/>
+      <param name="imu_topic"          type="string" value="$(arg imu_topic)"/>
+      <param name="wait_imu_to_init"   type="string" value="true"/> 
+      <!-- param name="Rtabmap/TimeThr"           type="string" value="150"/>
+      <param name="Rtabmap/DetectionRate" type="string" value="10"/ -->
       <!-- localization mode -->
       <param name="Mem/InitWMWithAllNodes" type="string" value="$(arg localization)"/> 
       <param     if="$(arg localization)" name="Mem/IncrementalMemory" type="string" value="false"/>

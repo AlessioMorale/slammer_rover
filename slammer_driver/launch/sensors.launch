@@ -1,5 +1,5 @@
 <launch>
   <include file="$(find slammer_driver)/launch/rplidar.launch" />
-  <include file="$(find slammer_driver)/launch/r200_camera.launch" />
+  <include file="$(find slammer_driver)/launch/camera.launch" />
   <include file="$(find slammer_driver)/launch/imu.launch" />
 </launch>

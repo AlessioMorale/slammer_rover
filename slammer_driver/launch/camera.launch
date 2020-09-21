@@ -1,0 +1,8 @@
+<launch>
+    <arg name="respawn" default="true" />
+    <include file="$(find realsense2_camera)/launch/rs_camera.launch">
+        <arg name="align_depth" value ="true" />
+    </include>
+
+
+</launch>    
