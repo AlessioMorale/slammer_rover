@@ -37,7 +37,7 @@
   <xacro:property name="camera_rpy" value="0 0 0"/>
 
   <xacro:include filename="$(find slammer_description)/urdf/materials.xacro" />
-  <xacro:include filename="$(find slammer_description)/urdf/m2wr.gazebo" />
+  <xacro:include filename="$(find slammer_description)/urdf/slammer.gazebo" />
   <xacro:include filename="$(find slammer_description)/urdf/macros.xacro" />
 
   <!-- base link with global collision geometry -->
