@@ -1,7 +1,7 @@
 - git:
-    local-name: bosch_imu_driver
-    uri: git@github.com:AlessioMorale/bosch_imu_driver.git
-    version: amorale/integration
+    local-name: ros_imu_bno055
+    uri: https://github.com/RoboticArts/ros_imu_bno055.git
+    version: master
 - git:
     local-name: ros-power-ina219
     uri: git@github.com:AlessioMorale/ros-power-ina219.git

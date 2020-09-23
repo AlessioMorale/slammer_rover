@@ -1,10 +1,9 @@
 # USB port
-port: /dev/serial/by-path/platform-70090000.xusb-usb-0:2.3.3.2:1.0-port0
+serial_port: /dev/serial/by-path/platform-70090000.xusb-usb-0:2.3.3.2:1.0-port0
 # Tf frame id
 frame_id: imu_bosch_link
-# Data reading frequency
-freqency: 200
-publish_raw: true
-publish_mag: true
-# Sensor operation mode --> modes could be found in sensor datasheet
-operation_mode: 0x0C
+freqency: 50
+use_temperature: true
+use_magnetometer: true
+operation_mode: IMU
+reset_orientation: true
