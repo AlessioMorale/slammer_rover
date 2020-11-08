@@ -1,9 +1,9 @@
 # USB port
-serial_port: /dev/serial/by-path/platform-70090000.xusb-usb-0:2.3.3.2:1.0-port0
+serial_port: /dev/serial/by-path/platform-70090000.xusb-usb-0:2.3.3.1:1.0-port0
 # Tf frame id
 frame_id: imu_bosch_link
-freqency: 50
+freqency: 100
 use_temperature: true
-use_magnetometer: true
-operation_mode: IMU
+use_magnetometer: false
+operation_mode: NDOF_FMC_OFF
 reset_orientation: true
