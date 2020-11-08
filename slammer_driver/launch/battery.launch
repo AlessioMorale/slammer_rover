@@ -1,7 +1,0 @@
-<?xml version="1.0"?>
-<launch>
-  <!-- params -->
-  <rosparam command="load" file="$(find slammer_driver)/config/battery.yaml" />
-  <!-- nodes -->
-  <node pkg="power_ina219" name="ina219_node" type="ina219_node"/>
-</launch>
