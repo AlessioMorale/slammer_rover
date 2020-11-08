@@ -1,6 +1,5 @@
 <?xml version="1.0"?>
 <launch>
-<include file="$(find slammer_driver)/launch/battery.launch"/>
 <node pkg="slammer_driver" type="notification.py" name ="notification" output="screen" respawn="true"/>
 <!-- node pkg="slammer_driver" type="oled.py" name ="oled" /-->
 <node pkg="ros_signalling_ws2812" type="node" name="ws2812" output="screen" respawn="true" />
