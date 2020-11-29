@@ -3,10 +3,6 @@
     uri: https://github.com/RoboticArts/ros_imu_bno055.git
     version: master
 - git:
-    local-name: ros-power-ina219
-    uri: git@github.com:AlessioMorale/ros-power-ina219.git
-    version: amorale/use_standard_libs
-- git:
     local-name: librealsense
     uri: https://github.com/IntelRealSense/librealsense.git
     version: master
