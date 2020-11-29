@@ -1,0 +1,10 @@
+version: "3.6"
+services:
+  builder:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: robot_builder
+    command:  "/bin/bash -c 'source /init_workspaces && cd /ros_melodic_robot/ && ls -al && catkin build'"
+    volumes:
+      - "../../..:/ros_melodic_robot/"

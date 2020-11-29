@@ -1,19 +1,20 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
-  <xacro:macro name="link_wheel" params="name">
-    <link name="${name}">
+
+<xacro:macro name="joint_wheel" params="name child origin_xyz">
+    <link name="${child}">
       <inertial>
         <mass value="0.2"/>
         <origin rpy="0 1.5707 1.5707" xyz="0 0 0"/>
         <inertia ixx="0.000526666666667" ixy="0" ixz="0" iyy="0.000526666666667" iyz="0" izz="0.001"/>
       </inertial>
-      <collision name="${name}_collision">
+      <collision name="${child}_collision">
         <origin rpy="0 1.5707 1.5707" xyz="0 0 0"/>
         <geometry>
           <cylinder length="0.065" radius="0.06"/>
         </geometry>
       </collision>
-      <visual name="${name}_visual">
+      <visual name="${child}_visual">
         <origin rpy="0 1.5707 1.5707" xyz="0 0 0"/>
         <geometry>
           <cylinder length="0.065" radius="0.06"/>
@@ -21,30 +22,28 @@
         <material name="black" />
       </visual>
     </link>
-  </xacro:macro>
 
-
-  <xacro:macro name="joint_static_wheel" params="name child origin_xyz">
     <joint name="${name}" type="continuous">
       <origin rpy="0 0 0" xyz="${origin_xyz}"/>
       <child link="${child}"/>
       <parent link="link_chassis"/>
-      <!-- <axis rpy="0 0 0" xyz="0 1 0"/>
-      <limit effort="10000" velocity="1000"/>
-      <joint_properties damping="1.0" friction="1.0"/ -->
-    </joint>
-  </xacro:macro>
-
-  <xacro:macro name="joint_wheel" params="name child origin_xyz">
-    <joint name="${name}" type="continuous">
-      <origin rpy="0 0 0" xyz="${origin_xyz}"/>
-      <child link="${child}"/>
-      <parent link="link_chassis"/>
-      <axis rpy="0 0 0" xyz="0 1 0"/>
+      <axis xyz="0 1 0"/>
       <limit effort="10000" velocity="1000"/>
       <joint_properties damping="1.0" friction="1.0"/>
     </joint>
+
+    <transmission name="${name}_transmission">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="${name}">
+        <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="${name}_actuator">
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
   </xacro:macro>
+  
+  
 
   <xacro:macro name="cylinder_inertia" params="mass r l">
     <inertia ixx="${mass*(3*r*r+l*l)/12}" ixy = "0" ixz = "0" iyy="${mass*(3*r*r+l*l)/12}" iyz = "0" izz="${mass*(r*r)/2}" />
