@@ -1,20 +1,10 @@
+<?xml version="1.0"?>
 <launch>
-  <arg name="port" default="/dev/ttyACM0" />
-  <arg name="msgttl" default="-1" />
-  <rosparam command="load" file="$(find slammer_control)/config/control.yaml" />
-  <node pkg="unav2_hardware" type="hardware_node" name="hardware_node">
-    <param name="JointNames" value="joint1,joint2"/>
-  </node>
-  <node name="controller_spawner" pkg="controller_manager" type="spawner" args="joint_publisher velocity_controller" />
-  <node pkg="rosserial_server" type="serial_node" name="rosserial_unav" output="log" respawn="true" respawn_delay="0.5">
-    <param name="port" value="$(arg port)" />
-  </node>
-  <node pkg="unav2_hardware" type="configuration_manager.py" name="unav2_configuration_manager" output="log" respawn="true" respawn_delay="0.5">
-    <param name="msgttl" value="$(arg msgttl)"/>
-  </node>
-  <node name="dynamic_reconfigure_encoder_load" pkg="dynamic_reconfigure" type="dynparam" args="load /unav2_configuration_manager/encoder $(find slammer_control)/params/encoder.yaml" />
-  <node name="dynamic_reconfigure_hardware_load" pkg="dynamic_reconfigure" type="dynparam" args="load /unav2_configuration_manager/mechanical $(find slammer_control)/params/mechanical.yaml" />
-  <node name="dynamic_reconfigure_pidcat_load" pkg="dynamic_reconfigure" type="dynparam" args="load /unav2_configuration_manager/pid $(find slammer_control)/params/pid.yaml" />
-
-
+  <include file="$(find slammer_control)/launch/unav.launch" />
+  <group ns="unav2">
+    <rosparam command="load" file="$(find slammer_control)/config/control.yaml" />
+    <node name="controller_spawner" pkg="controller_manager" type="spawner" args="joint_publisher velocity_controller" output="screen" >
+      <remap from="/unav2/joint_states" to="/joint_states"/>
+    </node>
+  </group>
 </launch>

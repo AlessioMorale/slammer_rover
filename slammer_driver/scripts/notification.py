@@ -17,16 +17,22 @@ battery_warn_threshold = 10.9
 battery_critical_threshold = 10.6
 
 
-front = 0
-lamp = 3
-rear = 1
+front = 3
+lamp = 1
+front_lamps = [lamp, 1]
+rear = 0
 front_count = 8
 rear_count = 20
 
-# R, G, B
-front_colour = [ 64, 64, 96]
-rear_colour  = [16, 0, 0]
 
+# R, G, B
+color_yellow = [ 0xFF, 80, 00]
+color_dim_red = [64, 0, 0]
+color_green = [0, 0xFF, 0]
+color_black = [0, 0, 0]
+front_colour = front_count * [color_yellow]
+rear_colour  = 3 * [color_yellow] + [color_black] + 8  * [color_dim_red] + [color_black] + 3 * [color_yellow] + [color_green]
+front_lamps_color = [64, 64, 64]
 lamp_max = 32
 
 lamp_batt_ok = [lamp_max, lamp_max, lamp_max]
@@ -48,7 +54,7 @@ def on_batterystate(msg):
 if __name__ == '__main__':
     # setup ros node
     rospy.init_node('slammer_notifications')
-    rospy.Subscriber('/battery_state', BatteryState, on_batterystate)
+    rospy.Subscriber('/unav2/status/battery', BatteryState, on_batterystate)
     pub = rospy.Publisher('/signalling/leds', blink, queue_size=40)
     led = blink()
     led.led = 0
@@ -66,20 +72,30 @@ if __name__ == '__main__':
 
             #front white
             led.group = front
-            led.R = front_colour[0]
-            led.G = front_colour[1]
-            led.B = front_colour[2]
-            for i in range(front_count):
+            for i in range(len(front_colour)):
+                led.R = front_colour[i][0]
+                led.G = front_colour[i][1]
+                led.B = front_colour[i][2]
                 led.led = i
                 pub.publish(led)
                 rospy.rostime.wallsleep(0.1)
 
+            #front lights
+            led.group = front_lamps[0]
+            led.R = front_lamps_color[0]
+            led.G = front_lamps_color[1]
+            led.B = front_lamps_color[2]
+            led.led = front_lamps[1]
+            pub.publish(led)
+            rospy.rostime.wallsleep(0.1)
+
             #Read red
-            led.R = rear_colour[0]
-            led.G = rear_colour[1]
-            led.B = rear_colour[2]
             led.group = rear
-            for i in range(rear_count):
+            for i in range(len(rear_colour)):
+                led.R = rear_colour[i][0]
+                led.G = rear_colour[i][1]
+                led.B = rear_colour[i][2]
+
                 led.led = i
                 pub.publish(led)
                 rospy.rostime.wallsleep(0.01)

@@ -14,6 +14,7 @@ RUN source /init_workspaces && \
     wstool init -j8 src ./.rosinstall && \
     apt-get update && \
     rosdep install --from-paths src --ignore-src --rosdistro melodic -y --skip-keys='python3-opencv dkms opencv libopencv-dev cv-bridge libopencv rviz' && \
+    pip3 --no-cache install pyserial && \
     rm -rf /ros_melodic_robot/*
 
 ENV ROS_MASTER_URI http://127.0.0.1:11311/

@@ -1,7 +1,6 @@
 <launch>
-  <node pkg="robot_localization" type="ukf_localization_node" name="ukf_localization" output="screen">
+  <node pkg="robot_localization" type="ukf_localization_node" name="ukf_localization" output="screen" respawn="true" >
     <rosparam command="load" file="$(find slammer_mapping)/config/localization.yaml" />
-    <param name="two_d_mode" value="true" />
     <remap from="set_pose" to="/initialpose" />
   </node> 
 </launch>
