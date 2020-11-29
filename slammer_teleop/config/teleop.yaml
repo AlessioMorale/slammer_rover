@@ -1,35 +1,15 @@
 joy_node:
   auto_repeat_rate: 20
   coalesce_interval: 0.0333
-  deadzone: 0.01
+  deadzone: 0.1
   dev: /dev/input/js0
 
-teleop:
-  default:
-    type: topic
-    message_type: geometry_msgs/Twist
-    topic_name: cmd_velDummy
-    message_value:
-      -
-        target: linear.x
-        value: 0.0
-      -
-        target: angular.z
-        value: 0.0
-      -
-        target: linear.y
-        value: 0.0
-  drive:
-    type: topic
-    message_type: geometry_msgs/Twist
-    topic_name: /joy_teleop/cmd_vel
-    axis_mappings:
-      - axis: 1
-        target: linear.x
-        scale: 0.1
-      - axis: 2
-        target: angular.z
-        scale: .25
+teleop_twist_joy:
+    axis_linear: 1
+    scale_linear: 1
+    axis_angular: 3
+    scale_angular: 1
+    enable_button: 4
 
 twist_mux:
   topics:

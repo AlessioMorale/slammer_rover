@@ -21,45 +21,21 @@ velocity_controller:
   enable_odom_tf: false
 
   # Wheel separation and radius multipliers
-  wheel_separation_multiplier: 1.0 # default: 1.0
-  wheel_radius_multiplier    : 1.0 # default: 1.0
+  wheel_separation_multiplier: 1.0
+  wheel_radius_multiplier    : 1.0
 
   wheel_radius:                 0.06
   wheel_separation:             0.24
 
-
-  # Velocity and acceleration limits
-  # Whenever a min_* is unspecified, default to -max_*
   linear:
     x:
       has_velocity_limits    : true
-      max_velocity           : 0.3   # m/s
+      max_velocity           : 1.0   # m/s
       has_acceleration_limits: true
       max_acceleration: 1.0
-      has_jerk_limits: true
-      max_jerk: 100.0
   angular:
     z:
       has_velocity_limits    : true
       max_velocity           : 4.0   # rad/s
       has_acceleration_limits: true
-      max_acceleration       : 20.0   # rad/s^2
-
-
-joint_limits:
-  joint1: 
-    has_velocity_limits    : true
-    max_velocity           : 1.0   # m/s
-    has_velocity_limits: true
-    has_acceleration_limits: true
-    max_acceleration: 1.0
-    has_jerk_limits: true
-    max_jerk: 0.0
-  joint2:
-    has_velocity_limits    : true
-    max_velocity           : 1.0   # m/s
-    has_velocity_limits: true
-    has_acceleration_limits: true
-    max_acceleration: 1.0
-    has_jerk_limits: true
-    max_jerk: 0.0
+      max_acceleration       : 5.0   # rad/s^2

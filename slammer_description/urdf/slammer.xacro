@@ -140,17 +140,10 @@
   </link>
 
   <!-- Wheels -->
-  <xacro:link_wheel name="link_right_wheel" />
   <xacro:joint_wheel name="joint1" child="link_right_wheel" origin_xyz="${wheel_front_x_displacement} ${wheel_y_displacement} ${wheel_z_displacement}" />
-
-  <xacro:link_wheel name="link_left_wheel" />
   <xacro:joint_wheel name="joint2" child="link_left_wheel" origin_xyz="${wheel_front_x_displacement} ${-wheel_y_displacement} ${wheel_z_displacement}" />
-
-  <xacro:link_wheel name="link_rear_right_wheel" />
-  <xacro:joint_static_wheel name="joint3" child="link_rear_right_wheel" origin_xyz="${wheel_rear_x_displacement} ${wheel_y_displacement} ${wheel_z_displacement}" />
-
-  <xacro:link_wheel name="link_rear_left_wheel" />
-  <xacro:joint_static_wheel name="joint4" child="link_rear_left_wheel" origin_xyz="${wheel_rear_x_displacement} ${-wheel_y_displacement} ${wheel_z_displacement}" />
+  <xacro:joint_wheel name="joint3" child="link_rear_right_wheel" origin_xyz="${wheel_rear_x_displacement} ${wheel_y_displacement} ${wheel_z_displacement}" />
+  <xacro:joint_wheel name="joint4" child="link_rear_left_wheel" origin_xyz="${wheel_rear_x_displacement} ${-wheel_y_displacement} ${wheel_z_displacement}" />
 
   <!-- IMU -->
   <joint name="link_chassis_to_imu_bosch" type="fixed">
