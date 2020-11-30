@@ -7,8 +7,8 @@ velocity_controller:
   left_wheel: ['joint2','joint4']
   right_wheel: ['joint1','joint3']
   publish_rate: 50
-  pose_covariance_diagonal: [0.001, 0.001, 1000000.0, 1000000.0, 1000000.0, 0.03]
-  twist_covariance_diagonal: [0.001, 0.001, 0.001, 1000000.0, 1000000.0, 0.03]
+  pose_covariance_diagonal: [0.001, 0.001, 1000000.0, 1000000.0, 1000000.0, 1000.0]
+  twist_covariance_diagonal: [0.001, 0.001, 1000000.0, 1000000.0, 1000000.0, 1000.0]
   
 
   cmd_vel_timeout: 0.25
@@ -23,8 +23,8 @@ velocity_controller:
   wheel_separation_multiplier: 1.0
   wheel_radius_multiplier    : 1.0
 
-  wheel_radius:                 0.06
-  wheel_separation:             0.24
+  wheel_radius:                 0.0615
+  wheel_separation:             0.21
 
   linear:
     x:
@@ -37,4 +37,4 @@ velocity_controller:
       has_velocity_limits    : true
       max_velocity           : 4.0   # rad/s
       has_acceleration_limits: true
-      max_acceleration       : 5.0   # rad/s^2
+      max_acceleration       : 4.0   # rad/s^2

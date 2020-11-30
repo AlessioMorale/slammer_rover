@@ -1,0 +1,57 @@
+rosserial_unav:
+  port: "/dev/ttyACM0"
+
+unav2_hardware:
+  joint_names: "joint1,joint2,joint3,joint4"
+  port: "/dev/ttyACM0"
+
+unav2_configuration_manager:
+  bridge:
+    pwm_dead_time: 0
+    pwm_frequency: 1
+  encoder:
+    channels: 2
+    cpr: 4096
+    has_z_index: false
+    invert0: false
+    invert1: true
+    position: 1
+  mechanical:
+    ratio: 75.0
+    rotation0: true
+    rotation1: true
+  msgttl: -1
+  operation:
+    operation_mode: 1
+    reset_to_dfu: false
+  pid:
+    current_enable: false
+    current_frequency: 1000
+    current_kaw: 0.0
+    current_kd: 0.0
+    current_ki: 0.0
+    current_kp: 0.0
+    pid_debug: true
+    velocity_frequency: 250
+    velocity_kaw: 0.5
+    velocity_kd: 0.0
+    velocity_ki: 4.0
+    velocity_kp: 3.0
+  safety:
+    bridge_off: 1000
+    current_autorestore: 500
+    current_limit: 3.0
+    current_timeout: 100
+    current_warning: 2.0
+    error_limit: 100
+    max_acceleration: 20000.0
+    max_deceleration: 20000.0
+    position_limit: 6.28
+    pwm_limit: 100
+    slope_time: 1000
+    temp_autorestore: 0
+    temp_limit: 80.0
+    temp_timeout: 100
+    temp_warning: 60.0
+    timeout: 100
+    velocity_limit: 20000.0
