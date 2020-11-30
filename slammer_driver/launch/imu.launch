@@ -1,5 +1,5 @@
 <launch>
-  <node pkg="ros_imu_bno055" type="imu_ros.py" name="ros_imu_bno055_node" ns="boschimu" output="screen" respawn="true">
+  <node pkg="ros_imu_bno055" type="imu_ros.py" name="ros_imu_bno055_node" ns="boschimu" output="log" respawn="true">
     <rosparam file="$(find slammer_driver)/config/imu_bosch.yaml" command="load"/>
   </node>
 </launch>

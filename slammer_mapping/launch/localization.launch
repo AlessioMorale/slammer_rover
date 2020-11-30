@@ -1,5 +1,5 @@
 <launch>
-  <node pkg="robot_localization" type="ukf_localization_node" name="ukf_localization" output="screen" respawn="true" >
+  <node pkg="robot_localization" type="ukf_localization_node" name="ukf_localization" output="log" respawn="true" >
     <rosparam command="load" file="$(find slammer_mapping)/config/localization.yaml" />
     <remap from="set_pose" to="/initialpose" />
   </node> 

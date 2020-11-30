@@ -3,7 +3,7 @@
  <!--- Run AMCL --> 
     <!--include file="$(find amcl)/examples/amcl_diff.launch" /-->
 
-   <node pkg="move_base" type="move_base" respawn="true" name="move_base" output="screen">
+   <node pkg="move_base" type="move_base" respawn="true" name="move_base" output="log">
     <rosparam file="$(find slammer_navigation)/config/costmap_common_params.yaml" command="load" ns="global_costmap" /> 
     <rosparam file="$(find slammer_navigation)/config/costmap_common_params.yaml" command="load" ns="local_costmap" />
     <rosparam file="$(find slammer_navigation)/config/local_costmap_params.yaml" command="load" />

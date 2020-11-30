@@ -3,7 +3,7 @@
   <include file="$(find slammer_control)/launch/unav.launch" />
   <group ns="unav2">
     <rosparam command="load" file="$(find slammer_control)/config/control.yaml" />
-    <node name="controller_spawner" pkg="controller_manager" type="spawner" args="joint_publisher velocity_controller" output="screen" >
+    <node name="controller_spawner" pkg="controller_manager" type="spawner" args="joint_publisher velocity_controller" output="log" >
       <remap from="/unav2/joint_states" to="/joint_states"/>
     </node>
   </group>

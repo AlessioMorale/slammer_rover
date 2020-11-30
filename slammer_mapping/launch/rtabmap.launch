@@ -16,7 +16,7 @@
   <group ns="rtabmap">
     <!--  Visual Odometry -->
 <!--
-    <node if="$(arg visual_odom_active)" pkg="rtabmap_ros" type="rgbd_odometry" name="visual_odometry" output="screen" args="$(arg rtabmap_args)" respawn="true">
+    <node if="$(arg visual_odom_active)" pkg="rtabmap_ros" type="rgbd_odometry" name="visual_odometry" output="log" args="$(arg rtabmap_args)" respawn="true">
       <remap from="rgb/image"       to="$(arg rgb_topic)"/>
       <remap from="depth/image"     to="$(arg depth_topic)"/>
       <remap from="rgb/camera_info" to="$(arg camera_info_topic)"/>
@@ -35,7 +35,7 @@
       <param name="wait_imu_to_init"   type="string" value="true"/> 
     </node>-->
     <!-- SLAM -->
-    <node name="rtabmap" pkg="rtabmap_ros" type="rtabmap" output="screen" args="$(arg rtabmap_args)" respawn="true">
+    <node name="rtabmap" pkg="rtabmap_ros" type="rtabmap" output="log" args="$(arg rtabmap_args)" respawn="true">
       <param name="frame_id"        type="string" value="$(arg frame_id)"/>
       <param name="subscribe_scan" type="bool" value="true"/>
 

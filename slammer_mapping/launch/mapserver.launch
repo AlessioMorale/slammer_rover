@@ -1,4 +1,4 @@
 <launch>
-  <node pkg="map_server" type="map_server" name="map_server" args="$(find slammer_mapping)/config/map.yaml" output="screen" respawn="true">
+  <node pkg="map_server" type="map_server" name="map_server" args="$(find slammer_mapping)/config/map.yaml" output="log" respawn="true">
   </node>
 </launch>

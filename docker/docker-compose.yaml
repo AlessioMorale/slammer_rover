@@ -14,6 +14,7 @@ services:
     volumes:
       - "../../..:/ros_melodic_robot/"
       - "/dev:/dev"
+      - "../../../.ros/:/root/.ros/"
 
 
   slammer_description:
@@ -27,7 +28,9 @@ services:
     network_mode: "host"
     volumes:
       - "../../..:/ros_melodic_robot/"
+      - "../../../.ros/:/root/.ros/"
     restart: on-failure
+
   slammer_control:
     build:
       context: ..
@@ -40,6 +43,7 @@ services:
     volumes:
       - "../../..:/ros_melodic_robot/"
       - "/dev:/dev"
+      - "../../../.ros/:/root/.ros/"
     privileged: true
 
   slammer_teleop:
@@ -53,6 +57,9 @@ services:
     network_mode: "host"
     volumes:
       - "../../..:/ros_melodic_robot/"
+      - "/dev:/dev"
+      - "../../../.ros/:/root/.ros/"
+    privileged: true
 
   slammer_mapping:
     build:
@@ -65,4 +72,6 @@ services:
     network_mode: "host"
     volumes:
       - "../../..:/ros_melodic_robot/"
+      - "../../../.ros/:/root/.ros/"
+    privileged: true
 
