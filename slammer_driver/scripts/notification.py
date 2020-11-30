@@ -56,13 +56,16 @@ if __name__ == '__main__':
     rospy.init_node('slammer_notifications')
     rospy.Subscriber('/unav2/status/battery', BatteryState, on_batterystate)
     pub = rospy.Publisher('/signalling/leds', blink, queue_size=40)
+    rospy.loginfo("Waiting for led service")
+    while not rospy.is_shutdown() and pub.get_num_connections() == 0:
+        rospy.sleep(0.05)
+    rospy.loginfo("Connected")
+
     led = blink()
     led.led = 0
     led.msecOn = 0
     led.msecOff = 0
     led.single = False
-
-    rospy.rostime.wallsleep(5)
 
 
     init = True
