@@ -18,13 +18,13 @@ twist_mux:
     timeout : 0.5
     priority: 100
   - name    : move_base
-    topic   : move_base/cmd_vel
+    topic   : /move_base/cmd_vel
     timeout : 0.5
     priority: 10
 
   locks:
   - name    : manual
-    topic   : /joy_priority
+    topic   : joy_priority
     timeout : 0.0    
     priority: 100  
 
