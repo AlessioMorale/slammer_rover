@@ -1,8 +1,12 @@
-rosserial_unav:
-  port: "/dev/ttyACM0"
 
-unav2_hardware:
-  joint_names: "joint1,joint2,joint3,joint4"
+joints:
+  - right_front_wheel
+  - left_front_wheel
+  - right_rear_wheel
+  - left_rear_wheel
+controller_rate: 50
+
+rosserial_unav:
   port: "/dev/ttyACM0"
 
 unav2_configuration_manager:
@@ -11,10 +15,10 @@ unav2_configuration_manager:
     pwm_frequency: 1
   encoder:
     channels: 2
-    cpr: 4096
+    cpr: 100
     has_z_index: false
     invert0: false
-    invert1: true
+    invert1: false
     position: 1
   mechanical:
     ratio: 75.0

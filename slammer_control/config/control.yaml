@@ -4,8 +4,8 @@ joint_publisher:
 
 velocity_controller:
   type: "diff_drive_controller/DiffDriveController"
-  left_wheel: ['joint2','joint4']
-  right_wheel: ['joint1','joint3']
+  left_wheel: ['left_front_wheel','left_rear_wheel']
+  right_wheel: ['right_front_wheel','right_rear_wheel']
   publish_rate: 50
   pose_covariance_diagonal: [0.001, 0.001, 1000000.0, 1000000.0, 1000000.0, 1000.0]
   twist_covariance_diagonal: [0.001, 0.001, 1000000.0, 1000000.0, 1000000.0, 1000.0]

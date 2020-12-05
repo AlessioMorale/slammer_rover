@@ -13,6 +13,10 @@ teleop_twist_joy:
 
 twist_mux:
   topics:
+  - name    : desktop_joy
+    topic   : desktop_joy_teleop/cmd_vel
+    timeout : 0.5
+    priority: 100
   - name    : joy
     topic   : joy_teleop/cmd_vel
     timeout : 0.5

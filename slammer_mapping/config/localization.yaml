@@ -27,7 +27,7 @@ frequency: 50
 
 ################ wheels ODOM0 ################
 
-odom0: /velocity_controller/odom
+odom0: /unav2/velocity_controller/odom
 odom0_config: [true, true, false,
                false, false, true,
                true, false, false,
