@@ -75,3 +75,17 @@ services:
       - "../../../.ros/:/root/.ros/"
     privileged: true
 
+  slammer_navigation:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+      args:
+        - STARTUP_PACKAGE=slammer_navigation
+        - STARTUP_LAUNCH=move_base.launch
+    image: slammer_navigation
+    network_mode: "host"
+    volumes:
+      - "../../..:/ros_melodic_robot/"
+      - "../../../.ros/:/root/.ros/"
+    privileged: true
+
