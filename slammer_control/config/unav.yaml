@@ -15,9 +15,9 @@ unav2_configuration_manager:
     pwm_frequency: 1
   encoder:
     channels: 2
-    cpr: 100
+    cpr: 4096
     has_z_index: false
-    invert0: false
+    invert0: true
     invert1: false
     position: 1
   mechanical:
