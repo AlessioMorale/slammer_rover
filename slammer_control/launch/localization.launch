@@ -1,0 +1,6 @@
+<launch>
+  <node pkg="robot_localization" type="ekf_localization_node" name="ekf_localization" output="log" respawn="true" >
+    <rosparam command="load" file="$(find slammer_control)/config/localization.yaml" />
+    <remap from="set_pose" to="/initialpose" />
+  </node> 
+</launch>

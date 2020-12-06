@@ -1,0 +1,111 @@
+world_frame: odom
+odom_frame: odom
+map_frame: map
+base_link_frame: base_link
+two_d_mode: true
+frequency: 30
+transform_time_offset: 0.0
+debug_out_file: debug_odom_xkf.txt
+print_diagnostics: true
+debug: false
+process_noise_covariance: [0.05, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,    0, 0, 0,
+
+                            0, 0.05, 0, 0, 0, 0, 0, 0, 0,  0, 0, 0, 0, 0, 0,
+
+                            0, 0, 0.06, 0, 0, 0, 0, 0, 0,  0, 0, 0, 0, 0, 0,
+
+                            0, 0, 0, 0.03, 0, 0, 0, 0, 0,  0, 0, 0, 0, 0, 0,
+
+                            0, 0, 0, 0, 0.03, 0, 0, 0, 0,  0, 0, 0, 0, 0, 0,
+
+                            0, 0, 0, 0, 0, 0.06, 0, 0, 0,  0, 0, 0, 0, 0, 0,
+
+                            0, 0, 0, 0, 0, 0, 0.025,0, 0,  0, 0, 0, 0, 0, 0,
+
+                            0, 0, 0, 0, 0, 0, 0, 0.025,0,  0, 0, 0, 0, 0, 0,
+
+                            0, 0, 0, 0, 0, 0, 0, 0, 0.04, 0,    0, 0, 0, 0, 0,
+
+                            0, 0, 0, 0, 0, 0, 0, 0, 0,  0.01, 0, 0, 0, 0, 0,
+
+                            0, 0, 0, 0, 0, 0, 0, 0, 0,  0, 0.01, 0, 0, 0, 0,
+
+                            0, 0, 0, 0, 0, 0, 0, 0, 0,  0, 0, 0.02, 0, 0, 0,
+
+                            0, 0, 0, 0, 0, 0, 0, 0, 0,  0, 0, 0, 0.01, 0, 0,
+
+                            0, 0, 0, 0, 0, 0, 0, 0, 0,  0, 0, 0, 0, 0.01, 0,
+
+                            0, 0, 0, 0, 0, 0, 0, 0, 0,  0, 0, 0, 0, 0, 0.005]
+
+initial_estimate_covariance: [1e-9, 0,    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,    0, 0,
+
+                                0, 1e-9, 0, 0, 0, 0, 0, 0, 0, 0,    0, 0, 0, 0, 0,
+
+                                0, 0, 1e-9, 0, 0, 0, 0, 0, 0, 0,    0, 0, 0, 0, 0,
+
+                                0, 0, 0, 1e-9, 0, 0, 0, 0, 0, 0,    0, 0, 0, 0, 0,
+
+                                0, 0, 0, 0, 1e-9, 0, 0, 0, 0, 0,    0, 0, 0, 0, 0,
+
+                                0, 0, 0, 0, 0, 1e-9, 0, 0, 0, 0,    0, 0, 0, 0, 0,
+
+                                0, 0, 0, 0, 0, 0, 1 , 0, 0, 0,    0, 0, 0, 0, 0,
+
+                                0, 0, 0, 0, 0, 0, 0, 1 , 0, 0,    0, 0, 0, 0, 0,
+
+                                0, 0, 0, 0, 0, 0, 0, 0, 1e-9, 0,    0, 0, 0, 0, 0,
+
+                                0, 0, 0, 0, 0, 0, 0, 0, 0, 1,    0, 0, 0, 0, 0,
+
+                                0, 0, 0, 0, 0, 0, 0, 0, 0, 0,    1, 0, 0, 0, 0,
+
+                                0, 0, 0, 0, 0, 0, 0, 0, 0, 0,    0, 1 , 0, 0, 0,
+
+                                0, 0, 0, 0, 0, 0, 0, 0, 0, 0,    0, 0, 1, 0, 0,
+
+                                0, 0, 0, 0, 0, 0, 0, 0, 0, 0,    0, 0, 0, 1e-9, 0,
+
+                                0, 0, 0, 0, 0, 0, 0, 0, 0, 0,    0, 0, 0, 0, 1e-9]
+# Sensor configuration http://docs.ros.org/melodic/api/robot_localization/html/state_estimation_nodes.html#sensor-config
+#        X,         Y,        Z,
+#     roll,     pitch,      yaw,
+#    dot X,     dot Y,    dot Z,
+# dot roll, dot pitch,  dot yaw,
+# dotdot X,  dotdot Y, dotdot Z
+
+
+################ visual ODOM0 ################
+#
+#odom1: /odometry/vis_odom
+#odom1_config: [true, true, true,
+#               false, false, false,
+#               true, true, true,
+#               false, false, false,
+#               false, false, false]
+#
+#odom1_queue_size: 5
+#odom1_differential: false
+#odom1_relative: true
+
+################ wheels ODOM0 ################
+
+odom0: /unav2/velocity_controller/odom
+odom0_config: [false, false, false,
+               false, false, false,
+               true, true, false,
+               false, false, true,
+               false, false, false]
+odom0_differential: false
+odom0_relative: false
+odom0_queue_size: 10
+################ IMU0 ################
+
+imu0: /boschimu/imu/data
+imu0_config: [false, false, false,
+              true, true, true,
+              false, false, false,
+              true, true, true,
+              false, false, false]
+
+imu0_differential: false
