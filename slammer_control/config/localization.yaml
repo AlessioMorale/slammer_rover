@@ -79,9 +79,9 @@ odom0: /unav2/velocity_controller/odom
 # do not provide some of the state variables estimated by the filter. For example, a TwistWithCovarianceStamped message
 # has no pose information, so the first six values would be meaningless in that case. Each vector defaults to all false
 # if unspecified, effectively making this parameter required for each sensor.
-odom0_config: [true,  true,  false,
+odom0_config: [false, false, false,
                false, false, false,
-               false, false, false,
+               true, true, true,
                false, false, true,
                false, false, false]
 
@@ -131,7 +131,6 @@ odom1_config: [true, true, false,
               true, true, false,
               false, false, true,
               false, false, false]
-
 odom1_queue_size: 5
 odom1_differential: false
 odom1_relative: true
@@ -174,13 +173,12 @@ odom1_relative: true
 
 imu0: /boschimu/imu/data
 imu0_config: [false, false, false,
-              false,  false,  true,
+              true, true, true,
               false, false, false,
-              true,  true,  true,
-              false, false, true]
+              true, true, true,
+              false, false, false]
 imu0_nodelay: false
-imu0_differential: false
-imu0_relative: true
+imu0_differential: true
 imu0_queue_size: 5
 imu0_pose_rejection_threshold: 0.8                 # Note the difference in parameter names
 imu0_twist_rejection_threshold: 0.8                #
