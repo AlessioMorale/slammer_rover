@@ -8,10 +8,10 @@
     <!-- nodes -->
     <node name="joy_node" pkg="joy" type="joy_node" respawn="true" />
 
-    <node pkg="teleop_twist_joy" type="teleop_node" name="teleop_twist_joy">
+    <node pkg="teleop_twist_joy" type="teleop_node" name="teleop_twist_joy" respawn="true" >
       <remap from="cmd_vel" to="joy_teleop/cmd_vel"/>
     </node>
-    <node pkg="twist_mux" type="twist_mux" name="twist_mux">
+    <node pkg="twist_mux" type="twist_mux" name="twist_mux" respawn="true" >
       <remap from="cmd_vel_out" to="/unav2/velocity_controller/cmd_vel"/>
     </node>
   </group>
