@@ -1,15 +1,19 @@
 <launch>
 
- <!--- Run AMCL --> 
-    <!--include file="$(find amcl)/examples/amcl_diff.launch" /-->
+   <!--- Run AMCL -->
+   <include file="$(find slammer_navigation)/launch/amcl.launch" />
+<arg name="base_global_planner" default="navfn/NavfnROS"/>
+<arg name="base_local_planner" default="dwa_local_planner/DWAPlannerROS"/>
 
    <node pkg="move_base" type="move_base" respawn="true" name="move_base" output="log">
-    <rosparam file="$(find slammer_navigation)/config/costmap_common_params.yaml" command="load" ns="global_costmap" /> 
-    <rosparam file="$(find slammer_navigation)/config/costmap_common_params.yaml" command="load" ns="local_costmap" />
-    <rosparam file="$(find slammer_navigation)/config/local_costmap_params.yaml" command="load" />
-    <rosparam file="$(find slammer_navigation)/config/global_costmap_params.yaml" command="load" /> 
-    <rosparam file="$(find slammer_navigation)/config/base_local_planner_params.yaml" command="load" />
-    <remap from="/cmd_vel" to="/move_base/cmd_vel"/>
- </node>
+      <param name="base_global_planner" value="$(arg base_global_planner)"/>
+      <param name="base_local_planner" value="$(arg base_local_planner)"/>
+      <rosparam file="$(find slammer_navigation)/config/costmap_common_params.yaml" command="load" ns="global_costmap" />
+      <rosparam file="$(find slammer_navigation)/config/costmap_common_params.yaml" command="load" ns="local_costmap" />
+      <rosparam file="$(find slammer_navigation)/config/local_costmap_params.yaml" command="load" />
+      <rosparam file="$(find slammer_navigation)/config/global_costmap_params.yaml" command="load" />
+      <rosparam file="$(find slammer_navigation)/config/base_local_planner_params.yaml" command="load" />
+      <remap from="/cmd_vel" to="/move_base/cmd_vel"/>
+   </node>
 
 </launch> 
