@@ -51,6 +51,7 @@
   <buildtool_depend>catkin</buildtool_depend>
   <exec_depend>map_server</exec_depend>
   <exec_depend>slam_gmapping</exec_depend>
+  <exec_depend>hector_slam</exec_depend>
 
   <!-- The export tag contains other, unspecified, tags -->
   <export>
