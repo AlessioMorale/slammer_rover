@@ -7,8 +7,8 @@ velocity_controller:
   left_wheel: ['left_front_wheel','left_rear_wheel']
   right_wheel: ['right_front_wheel','right_rear_wheel']
   publish_rate: 50
-  pose_covariance_diagonal: [0.001, 0.001, 1000000.0, 1000000.0, 1000000.0, 0.5]
-  twist_covariance_diagonal: [0.001, 0.001, 1000000.0, 1000000.0, 1000000.0, 0.5]
+  pose_covariance_diagonal: [0.001, 0.001, 1000000.0, 1000000.0, 1000000.0, 100.0]
+  twist_covariance_diagonal: [0.001, 0.001, 1000000.0, 1000000.0, 1000000.0, 100.0]
   
 
   cmd_vel_timeout: 0.25
@@ -20,7 +20,7 @@ velocity_controller:
   k_r: 0.1
 
   # Wheel separation and radius multipliers
-  wheel_separation_multiplier: 1.0
+  wheel_separation_multiplier: 1.8
   wheel_radius_multiplier    : 1.0
 
   wheel_radius:                 0.0615

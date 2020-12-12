@@ -6,6 +6,10 @@ joints:
   - left_rear_wheel
 controller_rate: 50
 
+battery_technology: 2
+battery_cells: 4
+battery_capacity: 3
+
 rosserial_unav:
   port: "/dev/ttyACM0"
 
