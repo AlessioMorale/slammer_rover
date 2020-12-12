@@ -7,6 +7,8 @@
   <arg name="approx_sync" default="false" />
   <arg name="visual_odom_active" default="false"/>
   <arg name="v_odom_topic" default="/odometry/vis_odom" />
+  <arg name="slam_active" default="true"/>
+
   <arg name="scan_topic" default="/scan" />
   <arg name="imu_topic" default="/boschimu/imu/data" />
 
@@ -40,7 +42,7 @@
     </node>
 
     <!-- SLAM -->
-    <node name="rtabmap" pkg="rtabmap_ros" type="rtabmap" output="log" args="$(arg rtabmap_args)" respawn="true">
+    <node if="$(arg slam_active)" name="rtabmap" pkg="rtabmap_ros" type="rtabmap" output="log" args="$(arg rtabmap_args)" respawn="true">
       <param name="frame_id"        type="string" value="$(arg frame_id)"/>
       <param name="subscribe_scan" type="bool" value="true"/>
 
@@ -48,6 +50,7 @@
       <remap from="depth/image"     to="$(arg depth_topic)"/>
       <remap from="rgb/camera_info" to="$(arg camera_info_topic)"/>
       <remap from="odom"            to="$(arg odom_topic)"/>
+      <!-- remap from="global_pose" to="/amcl_pose" / -->
       <remap from="scan" to="$(arg scan_topic)"/>
 
 	    <param name="landmark_linear_variance" type="double" value="0.1"/>
@@ -75,8 +78,7 @@
       <param name="imu_topic"          type="string" value="$(arg imu_topic)"/>
       <param name="wait_imu_to_init"   type="string" value="true"/> 
       <param name="Rtabmap/TimeThr"           type="string" value="150"/>
-      <param name="Rtabmap/DetectionRate" type="string" value="2"/>
-
+      <param name="Rtabmap/DetectionRate" type="string" value="5"/>
 
       <!-- http://wiki.ros.org/rtabmap_ros/Tutorials/Advanced%20Parameter%20Tuning -->
       <!-- 15 meters wide -->

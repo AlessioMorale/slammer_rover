@@ -1,5 +1,5 @@
 controller_frequency: 5.0
-recovery_behaviour_enabled: false
+recovery_behaviour_enabled: true
 
 TrajectoryPlannerROS:
   max_vel_x: 0.20
@@ -62,6 +62,6 @@ DWAPlannerROS:
   min_vel_theta: -0.3
 
   # Goal Tolerance Parameters
-  yaw_goal_tolerance: 0.4
-  xy_goal_tolerance: 0.4
+  yaw_goal_tolerance: 0.2
+  xy_goal_tolerance: 0.2
   latch_xy_goal_tolerance: false
