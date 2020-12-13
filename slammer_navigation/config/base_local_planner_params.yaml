@@ -1,5 +1,23 @@
 controller_frequency: 5.0
+planner_frequency: 1.0
+
 recovery_behaviour_enabled: true
+base_local_planner: "teb_local_planner/TebLocalPlannerROS"
+base_global_planner: "navfn/NavfnROS"
+
+recovery_behaviors:
+  - name: 'conservative_reset'
+    type: 'clear_costmap_recovery/ClearCostmapRecovery'
+  - name: 'aggressive_reset'
+    type: 'clear_costmap_recovery/ClearCostmapRecovery'
+
+conservative_reset:
+  reset_distance: 0.1
+  layer_names: ['obstacle_layer']
+
+aggressive_reset:
+  reset_distance: 0.0
+  layer_names: ['obstacle_layer']
 
 TrajectoryPlannerROS:
   max_vel_x: 0.20

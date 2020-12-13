@@ -1,9 +1,10 @@
 global_costmap:
+  resolution: 0.1
   global_frame: map
   robot_base_frame: base_link
   update_frequency: 5.0
   rolling_window: true
-  track_unknown_space: true
+  track_unknown_space: false
 
   plugins:
     - {name: obstacles_laser,           type: "costmap_2d::ObstacleLayer"}
