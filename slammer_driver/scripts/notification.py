@@ -26,13 +26,14 @@ rear_count = 20
 
 
 # R, G, B
-color_yellow = [ 0xFF, 80, 00]
-color_dim_red = [64, 0, 0]
-color_green = [0, 0xFF, 0]
+color_yellow = [ 0x80, 40, 00]
+color_dim_red = [16, 0, 0]
+color_dim_white = [16, 16, 16]
+color_green = [0, 16, 0]
 color_black = [0, 0, 0]
 front_colour = front_count * [color_yellow]
-rear_colour  = 3 * [color_yellow] + [color_black] + 8  * [color_dim_red] + [color_black] + 3 * [color_yellow] + [color_green]
-front_lamps_color = [64, 64, 64]
+rear_colour  = 5 * [color_green] + 6  * [color_dim_white] + 5 * [color_dim_red] + [color_green]
+front_lamps_color = [16, 16, 16]
 lamp_max = 32
 
 lamp_batt_ok = [lamp_max, lamp_max, lamp_max]
