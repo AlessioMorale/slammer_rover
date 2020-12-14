@@ -1,6 +1,6 @@
 version: "3.6"
 services:
-  slammer_drivers:
+  drivers:
     privileged: true
 
     build:
@@ -9,7 +9,7 @@ services:
       args:
         - STARTUP_PACKAGE=slammer_driver
         - STARTUP_LAUNCH=driver.launch
-    image: slammer_drivers
+    image: drivers
     network_mode: "host"
     volumes:
       - "../../..:/ros_melodic_robot/"
@@ -17,43 +17,28 @@ services:
       - "../../../.ros/:/root/.ros/"
 
 
-  slammer_description:
+  description:
     build:
       context: ..
       dockerfile: docker/Dockerfile
       args:
         - STARTUP_PACKAGE=slammer_description
         - STARTUP_LAUNCH=description.launch
-    image: slammer_description
+    image: description
     network_mode: "host"
     volumes:
       - "../../..:/ros_melodic_robot/"
       - "../../../.ros/:/root/.ros/"
     restart: on-failure
 
-  slammer_control:
-    build:
-      context: ..
-      dockerfile: docker/Dockerfile
-      args:
-        - STARTUP_PACKAGE=slammer_control
-        - STARTUP_LAUNCH=control.launch
-    image: slammer_control
-    network_mode: "host"
-    volumes:
-      - "../../..:/ros_melodic_robot/"
-      - "/dev:/dev"
-      - "../../../.ros/:/root/.ros/"
-    privileged: true
-
-  slammer_teleop:
+  teleop:
     build:
       context: ..
       dockerfile: docker/Dockerfile
       args:
         - STARTUP_PACKAGE=slammer_teleop
         - STARTUP_LAUNCH=teleop.launch
-    image: slammer_teleop
+    image: teleop
     network_mode: "host"
     volumes:
       - "../../..:/ros_melodic_robot/"
@@ -61,21 +46,43 @@ services:
       - "../../../.ros/:/root/.ros/"
     privileged: true
 
-  slammer_mapping:
+  control:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+      args:
+        - STARTUP_PACKAGE=slammer_control
+        - STARTUP_LAUNCH=control.launch
+    image: control
+    network_mode: "host"
+    volumes:
+      - "../../..:/ros_melodic_robot/"
+      - "/dev:/dev"
+      - "../../../.ros/:/root/.ros/"
+    privileged: true
+    depends_on:
+      - description
+      - teleop
+
+  mapping:
     build:
       context: ..
       dockerfile: docker/Dockerfile
       args:
         - STARTUP_PACKAGE=slammer_mapping
         - STARTUP_LAUNCH=mapping.launch
-    image: slammer_mapping
+    image: mapping
     network_mode: "host"
     volumes:
       - "../../..:/ros_melodic_robot/"
+      - "/dev:/dev"
       - "../../../.ros/:/root/.ros/"
     privileged: true
+    depends_on: 
+      - drivers
+      - control
 
-  slammer_navigation:
+  navigation:
     build:
       context: ..
       dockerfile: docker/Dockerfile
@@ -88,4 +95,6 @@ services:
       - "../../..:/ros_melodic_robot/"
       - "../../../.ros/:/root/.ros/"
     privileged: true
-
+    depends_on: 
+      - mapping
+      - control
