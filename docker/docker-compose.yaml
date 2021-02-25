@@ -1,100 +1,63 @@
 version: "3.6"
 services:
   drivers:
-    privileged: true
-
+    extends: &extend
+      file: docker-compose.base.yaml
+      service: base
     build:
-      context: ..
-      dockerfile: docker/Dockerfile
       args:
         - STARTUP_PACKAGE=slammer_driver
         - STARTUP_LAUNCH=driver.launch
     image: drivers
-    network_mode: "host"
-    volumes:
-      - "../../..:/ros_melodic_robot/"
-      - "/dev:/dev"
-      - "../../../.ros/:/root/.ros/"
-
 
   description:
+    extends: *extend
     build:
-      context: ..
-      dockerfile: docker/Dockerfile
       args:
         - STARTUP_PACKAGE=slammer_description
         - STARTUP_LAUNCH=description.launch
     image: description
-    network_mode: "host"
-    volumes:
-      - "../../..:/ros_melodic_robot/"
-      - "../../../.ros/:/root/.ros/"
-    restart: on-failure
 
   teleop:
+    extends: *extend
     build:
-      context: ..
-      dockerfile: docker/Dockerfile
       args:
         - STARTUP_PACKAGE=slammer_teleop
         - STARTUP_LAUNCH=teleop.launch
     image: teleop
-    network_mode: "host"
-    volumes:
-      - "../../..:/ros_melodic_robot/"
-      - "/dev:/dev"
-      - "../../../.ros/:/root/.ros/"
-    privileged: true
 
   control:
+    extends: *extend
     build:
-      context: ..
-      dockerfile: docker/Dockerfile
       args:
         - STARTUP_PACKAGE=slammer_control
         - STARTUP_LAUNCH=control.launch
     image: control
-    network_mode: "host"
-    volumes:
-      - "../../..:/ros_melodic_robot/"
-      - "/dev:/dev"
-      - "../../../.ros/:/root/.ros/"
-    privileged: true
     depends_on:
       - description
       - teleop
 
   mapping:
+    extends: *extend
+
     build:
-      context: ..
-      dockerfile: docker/Dockerfile
       args:
         - STARTUP_PACKAGE=slammer_mapping
         - STARTUP_LAUNCH=mapping.launch
     image: mapping
-    network_mode: "host"
-    volumes:
-      - "../../..:/ros_melodic_robot/"
-      - "/dev:/dev"
-      - "../../../.ros/:/root/.ros/"
     privileged: true
     depends_on: 
       - drivers
       - control
 
   navigation:
+    extends: *extend
+
     build:
-      context: ..
-      dockerfile: docker/Dockerfile
       args:
         - STARTUP_PACKAGE=slammer_navigation
         - STARTUP_LAUNCH=move_base.launch
     image: slammer_navigation
-    network_mode: "host"
-    volumes:
-      - "../../..:/ros_melodic_robot/"
-      - "../../../.ros/:/root/.ros/"
-    privileged: true
     depends_on: 
       - mapping
       - control

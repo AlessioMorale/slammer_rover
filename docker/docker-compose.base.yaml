@@ -1,0 +1,15 @@
+version: "3.6"
+services:
+  base:
+    privileged: true
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: drivers
+    network_mode: "host"
+    volumes:
+      - "../../..:/ros_melodic_robot/"
+      - "/dev:/dev"
+      - "../../../.ros/:/root/.ros/"
+      - "../../../.ccache:/root/ccache"
+    restart: on-failure
