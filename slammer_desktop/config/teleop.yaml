@@ -1,0 +1,12 @@
+joy_node:
+  auto_repeat_rate: 20
+  coalesce_interval: 0.0333
+  deadzone: 0.1
+  dev: /dev/input/js2
+
+teleop_twist_joy:
+    axis_linear: 1
+    scale_linear: 0.2
+    axis_angular: 2
+    scale_angular: .3
+    enable_button: 4
