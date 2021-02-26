@@ -7,11 +7,12 @@
   <arg name="odom_topic" default="/odometry/filtered" />
   <arg name="approx_sync" default="false" />
 
-  <arg name="visual_odom_active" default="false"/>
-  <arg name="icp_odom_active" default="true"/>
+  <arg name="visual_odom_active" default="true"/>
+  <arg name="slam_active" default="true"/>
+  <arg name="icp_odom_active" default="false"/>
+
 
   <arg name="v_odom_topic" default="/odometry/vis_odom" />
-  <arg name="slam_active" default="true"/>
 
   <arg name="scan_topic" default="/scan" />
   <arg name="imu_topic" default="/boschimu/imu/data" />
