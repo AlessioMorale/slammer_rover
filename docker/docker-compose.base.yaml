@@ -8,7 +8,8 @@ services:
     image: drivers
     network_mode: "host"
     volumes:
-      - "../../..:/ros_melodic_robot/"
+      - "../../../.docker_ws:/ros_melodic_robot/"
+      - "../../../src:/ros_melodic_robot/src"
       - "/dev:/dev"
       - "../../../.ros/:/root/.ros/"
       - "../../../.ccache:/root/ccache"
