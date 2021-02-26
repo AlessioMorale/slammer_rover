@@ -22,6 +22,8 @@ RUN echo "source /init_workspaces" > /root/.bashrc
 RUN mkdir -p /root/ccache
 RUN echo 'export "PATH=/usr/lib/ccache:$PATH"' >> /root/.bashrc
 
+RUN ldconfig
+
 # Set up entrypoint
 RUN echo "if [ -f /ros_melodic_robot/devel/setup.bash ]; then source /ros_melodic_robot/devel/setup.bash; fi" >> /init_workspaces
 RUN echo "if [ -f /ros_melodic_robot/devel/setup.bash ]; then source /ros_melodic_robot/devel/setup.bash; fi" >> /init_workspaces

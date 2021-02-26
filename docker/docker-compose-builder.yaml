@@ -8,10 +8,16 @@ services:
       context: ..
       dockerfile: docker/Dockerfile
     image: robot_builder
+    runtime: nvidia
+
     command: /bin/bash -c "
       source /init_workspaces &&
       cd /ros_melodic_robot/ &&
       ls -al &&
-      catkin config -DBUILD_WITH_CUDA=true -DFORCE_RSUSB_BACKEND=true -DCMAKE_BUILD_TYPE=release -DBUILD_WITH_OPENMP=true &&
+      catkin config -DBUILD_WITH_CUDA=true -DFORCE_RSUSB_BACKEND=true -DCMAKE_BUILD_TYPE=release -DBUILD_WITH_OPENMP=true -DBUILD_EXAMPLES=false -DBUILD_GLSL_EXTENSIONS=false &&
+
+      catkin clean -y &&
       time catkin build --no-status --interleave
       "
+    
+
