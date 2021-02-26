@@ -20,10 +20,12 @@ ENV ROS_MASTER_URI http://127.0.0.1:11311/
 RUN echo "source /init_workspaces" > /root/.bashrc
 
 RUN mkdir -p /root/ccache
-RUN echo 'export "PATH=/usr/lib/ccache:$$PATH"' > /root/.bashrc
+RUN echo 'export "PATH=/usr/lib/ccache:$PATH"' >> /root/.bashrc
 
 # Set up entrypoint
 RUN echo "if [ -f /ros_melodic_robot/devel/setup.bash ]; then source /ros_melodic_robot/devel/setup.bash; fi" >> /init_workspaces
+RUN echo "if [ -f /ros_melodic_robot/devel/setup.bash ]; then source /ros_melodic_robot/devel/setup.bash; fi" >> /init_workspaces
+
 ARG STARTUP_PACKAGE=slammer_bringup
 ENV STARTUP_PACKAGE=${STARTUP_PACKAGE}
 ARG STARTUP_LAUNCH=bringup.launch

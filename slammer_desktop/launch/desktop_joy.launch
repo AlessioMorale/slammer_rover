@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<launch>
+    <group ns="desktop_teleop">
+        <!-- params -->
+        <rosparam command="load" file="$(find slammer_desktop)/config/teleop.yaml" />
+        <!-- nodes -->
+        <node name="joy_node" pkg="joy" type="joy_node" respawn="true" />
+
+        <node pkg="teleop_twist_joy" type="teleop_node" name="teleop_twist_joy">
+            <remap from="cmd_vel" to="/teleop/desktop_joy_teleop/cmd_vel"/>
+        </node>
+    </group>
+</launch>

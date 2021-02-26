@@ -1,0 +1,11 @@
+version: "3.6"
+services:
+  runner:
+    extends: &extend
+      file: docker-compose.base.yaml
+      service: base
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: robot_builder
+    command: /bin/bash -c "sleep infinity"
