@@ -1,14 +1,19 @@
 <launch>
+    <arg name="rgb_topic" default="/camera/color/image_raw" />
+    <arg name="depth_topic" default="/camera/aligned_depth_to_color/image_raw" />
+    <arg name="camera_info_topic" default="/camera/color/camera_info" />
+
     <arg name="respawn" default="true" />
     <include file="$(find realsense2_camera)/launch/rs_camera.launch">
         <arg name="align_depth" value ="true" />
-        <arg name="fisheye_fps" value="6"/>
-        <arg name="depth_fps" value="6"/>
-        <arg name="infra_fps" value="6"/>
-        <arg name="color_fps" value="6"/>
-         <arg name="enable_pointcloud" default="true"/>
-
+        <arg name="enable_pointcloud" default="false"/>
     </include>
-
+    <node pkg="nodelet" type="nodelet" name="rgbd_sync" args="load rtabmap_ros/rgbd_sync /camera/realsense2_camera_manager" output="screen">
+        <remap from="/camera/rgb/image" to="$(arg rgb_topic)"/>
+        <remap from="/camera/depth/image" to="$(arg depth_topic)"/>
+        <remap from="/camera/rgb/camera_info" to="$(arg camera_info_topic)"/>
+        <remap from="rgbd_image" to="rgbd_image"/>
+        <param name="approx_sync" value="false"/>
+    </node>
 
 </launch>    
