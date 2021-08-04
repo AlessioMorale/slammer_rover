@@ -1,15 +1,7 @@
 <?xml version="1.0"?>
 <launch>
     <group ns="unav2">
-        <rosparam file="$(find slammer_control)/config/unav.yaml" command="load" />
-        <node pkg="unav2_hardware" type="hardware_node" name="unav2_hardware" output="screen" respawn="true" respawn_delay="2">
-            <remap from="/unav2/joint_states" to="/joint_states"/>
-        </node>
-        <node pkg="unav2_hardware" type="configuration_manager.py" name="unav2_configuration_manager" output="log" respawn="true" respawn_delay="2"/>
-        <node pkg="rosserial_python" type="message_info_service.py" name="message_info_service" output="log" respawn="true" respawn_delay="2"/>
-        <node pkg="rosserial_server" type="serial_node" name="rosserial_unav" output="log" respawn="true" respawn_delay="0.5"/>
         <rosparam command="load" file="$(find slammer_control)/config/control.yaml" />
-
         <node name="controller_spawner" pkg="controller_manager" type="spawner" args="joint_publisher velocity_controller" output="log">
             <remap from="joint_states" to="/joint_states"/>
         </node>

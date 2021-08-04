@@ -1,7 +1,8 @@
 <?xml version="1.0"?>
 <launch>
-
-    <param name="robot_description" command="$(find xacro)/xacro '$(find slammer_description)/urdf/slammer.xacro'"/>
+    <arg name="sim" default="false"/>
+    <arg name="cmd_vel_topic" default="/unav2/velocity_controller/cmd_vel"/>
+    <param name="robot_description" command="$(find xacro)/xacro '$(find slammer_description)/urdf/slammer.xacro' sim:='$(arg sim)' cmd_vel_topic:='$(arg cmd_vel_topic)'"/>
 
     <!-- Combine joint values -->
     <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>

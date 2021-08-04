@@ -1,29 +1,65 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
-  
-  <gazebo reference="link_chassis">
-    <material>Gazebo/Orange</material>
-  </gazebo>
+
+  <xacro:arg name="motion_base_ns" default="/unav2/velocity_controller" />
+  <xacro:property name="cmd_vel_topic" value="$(arg motion_base_ns)/cmd_vel"/>
+  <xacro:property name="odom_topic" value="$(arg motion_base_ns)/odom"/>
+
   <gazebo reference="link_left_wheel">
     <material>Gazebo/Blue</material>
   </gazebo>
   <gazebo reference="link_right_wheel">
     <material>Gazebo/Blue</material>
   </gazebo>
-  
+
   <gazebo>
-    <plugin filename="libgazebo_ros_diff_drive.so" name="differential_drive_controller">
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+      <robotNamespace>/</robotNamespace>
+    </plugin>
+  </gazebo>
+
+  <gazebo>
+    <plugin name="skid_steer_drive_controller" filename="libgazebo_ros_skid_steer_drive.so">
+      <odometryFrame>odom </odometryFrame>
+
+      <updateRate>100.0</updateRate>
+      <robotNamespace>/</robotNamespace>
+      <leftFrontJoint>left_front_wheel</leftFrontJoint>
+      <rightFrontJoint>right_front_wheel</rightFrontJoint>
+      <leftRearJoint>left_rear_wheel</leftRearJoint>
+      <rightRearJoint>right_rear_wheel</rightRearJoint>
+      <wheelSeparation>0.24</wheelSeparation>
+      <wheelDiameter>0.13</wheelDiameter>
+      <robotBaseFrame>base_footprint</robotBaseFrame>
+
+      <torque>10</torque>
+      <publishWheelTF>false</publishWheelTF>
+      <publishWheelJointState>true</publishWheelJointState>
+
+      <topicName>${cmd_vel_topic}</topicName>
+      <broadcastTF>false</broadcastTF>
+      <covariance_x>0.0001</covariance_x>
+      <covariance_y>0.0001</covariance_y>
+      <covariance_yaw>0.01</covariance_yaw>
+
+      <commandTopic>${cmd_vel_topic}</commandTopic>
+      <odometryTopic>${odom_topic}</odometryTopic>
+      <broadcastTF>false</broadcastTF>
+      <publishOdomTF>false</publishOdomTF>
+    </plugin>
+    <!--    <plugin filename="libgazebo_ros_diff_drive.so" name="differential_drive_controller">
       <alwaysOn>true</alwaysOn>
-      <updateRate>20</updateRate>
-      <leftJoint>joint1</leftJoint>
-      <rightJoint>joint2</rightJoint>
+      <updateRate>50</updateRate>
+      <leftJoint>left_front_wheel</leftJoint>
+      <rightJoint>right_front_wheel</rightJoint>
       <wheelSeparation>0.24</wheelSeparation>
       <wheelDiameter>0.13</wheelDiameter>
       <torque>0.1</torque>
-      <commandTopic>cmd_vel</commandTopic>
-      <odometryTopic>odom</odometryTopic>
-      <odometryFrame>odom</odometryFrame>
-      <robotBaseFrame>link_chassis</robotBaseFrame>
-    </plugin>
+      <commandTopic>$(arg motion_base_ns)/cmd_vel</commandTopic>
+      <odometryTopic>$(arg motion_base_ns)/odom</odometryTopic>
+      <publishOdomTF>false</publishOdomTF>
+      <publishWheelTF>true</publishWheelTF>
+      <robotBaseFrame>base_link</robotBaseFrame>
+    </plugin> -->
   </gazebo>
 </robot>
