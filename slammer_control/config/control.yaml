@@ -4,8 +4,6 @@ joint_publisher:
 
 velocity_controller:
   type: "diff_drive_controller/DiffDriveController"
-  #left_wheel: ['left_front_wheel','left_rear_wheel']
-  #right_wheel: ['right_front_wheel','right_rear_wheel']
   left_wheel: ['left_front_wheel']
   right_wheel: ['right_front_wheel']
   publish_rate: 50
