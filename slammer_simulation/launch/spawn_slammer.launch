@@ -8,7 +8,7 @@
         <arg name="verbose" value="true"/>
 
         <arg name="debug" value="0" />
-        <arg name="gui" value="$(arg gui)" />empty_world.world
+        <arg name="gui" value="$(arg gui)" />
         <arg name="use_sim_time" value="$(arg use_sim_time)" />
         <arg name="headless" value="$(arg headless)" />
         <arg name="world_name" value="$(arg world_name)" />
@@ -18,5 +18,9 @@
     </include>
     <include file="$(find slammer_control)/launch/control.launch" />
     <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" args="-urdf -model slammer -param robot_description -x 0 -y 0 -z 0 -R 0 -P 0 -Y 0" />
-    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher"/>
+    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+        <rosparam>
+            source_list: [ "/unav2/joint_states" ]
+        </rosparam>
+    </node>
 </launch>
