@@ -4,6 +4,10 @@
   <xacro:arg name="motion_base_ns" default="/unav2/velocity_controller" />
   <xacro:property name="cmd_vel_topic" value="$(arg motion_base_ns)/cmd_vel"/>
   <xacro:property name="odom_topic" value="$(arg motion_base_ns)/odom"/>
+  <xacro:property name="camera_rate" value="15.0"/>
+
+  <xacro:property name="camera_color_fov" value="${69/180*pi}"/>
+  <xacro:property name="camera_depth_fov" value="${75/180*pi}"/>
 
   <gazebo reference="link_left_wheel">
     <material>Gazebo/Blue</material>
@@ -16,5 +20,47 @@
     <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
       <robotNamespace>/unav2/</robotNamespace>
     </plugin>
+  </gazebo>
+
+  <gazebo reference="camera_depth_frame">
+    <sensor name="camera_depth" type="depth">
+      <update_rate>${camera_rate}</update_rate>
+      <camera>
+        <horizontal_fov>${camera_depth_fov}</horizontal_fov>
+        <image>
+          <width>640</width>
+          <height>480</height>
+          <format>R8G8B8</format>
+        </image>
+        <clip>
+          <near>0.05</near>
+          <far>5</far>
+        </clip>
+      </camera>
+      <plugin name="camera_depth_controller" filename="libgazebo_ros_openni_kinect.so">
+        <baseline>0.2</baseline>
+        <alwaysOn>true</alwaysOn>
+        <updateRate>${camera_rate}</updateRate>
+        <cameraName>camera</cameraName>
+        <imageTopicName>color/image_raw</imageTopicName>
+        <cameraInfoTopicName>color/camera_info</cameraInfoTopicName>
+        <depthImageTopicName>depth/image_raw</depthImageTopicName>
+        <depthImageInfoTopicName>depth/camera_info</depthImageInfoTopicName>
+        <pointCloudTopicName>depth/points</pointCloudTopicName>
+        <frameName>camera_depth_optical_frame</frameName>
+        <pointCloudCutoff>0.5</pointCloudCutoff>
+        <pointCloudCutoffMax>5.0</pointCloudCutoffMax>
+        <distortionK1>0.0</distortionK1>
+        <distortionK2>0.0</distortionK2>
+        <distortionK3>0.0</distortionK3>
+        <distortionT1>0.0</distortionT1>
+        <distortionT2>0.0</distortionT2>
+        <CxPrime>0</CxPrime>
+        <Cx>0</Cx>
+        <Cy>0</Cy>
+        <focalLength>0</focalLength>
+        <hackBaseline>0</hackBaseline>
+      </plugin>
+    </sensor>
   </gazebo>
 </robot>
