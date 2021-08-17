@@ -44,21 +44,7 @@
   <xacro:include filename="$(find realsense2_description)/urdf/_d435.urdf.xacro" />
 
   <!-- base link with global collision geometry -->
-  <link name="base_link">
-    <!--visual>
-      <origin rpy="0 0 0" xyz="0 0 ${total_height / 2}"/>
-      <geometry>
-        <box size="${total_lenght} ${total_width} ${total_height}"/>
-      </geometry>
-      <material name="invisible_grey"/>
-    </visual-->
-    <collision>
-      <origin rpy="0 0 0" xyz="0 0 ${total_height / 2}" />
-      <geometry>
-        <box size="${total_lenght} ${total_width} ${total_height}" />
-      </geometry>
-    </collision>
-  </link>
+  <link name="base_link"/>
 
   <link name="base_footprint">
     <visual>
