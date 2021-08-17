@@ -23,4 +23,5 @@
             source_list: [ "/unav2/joint_states" ]
         </rosparam>
     </node>
+    <include file="$(find slammer_simulation)/launch/camera_processing.launch" />
 </launch>
