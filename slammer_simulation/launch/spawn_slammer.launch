@@ -6,7 +6,6 @@
 
     <include file="$(find gazebo_ros)/launch/empty_world.launch">
         <arg name="verbose" value="true"/>
-
         <arg name="debug" value="0" />
         <arg name="gui" value="$(arg gui)" />
         <arg name="use_sim_time" value="$(arg use_sim_time)" />
@@ -23,5 +22,5 @@
             source_list: [ "/unav2/joint_states" ]
         </rosparam>
     </node>
-    <include file="$(find slammer_simulation)/launch/camera_processing.launch" />
+    <include file="$(find slammer_simulation)/launch/includes/camera_processing.launch" />
 </launch>

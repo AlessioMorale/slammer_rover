@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name="rgb_topic" default="color/image_raw" />
+    <arg name="depth_topic" default="depth/image_raw" />
+    <arg name="aligned_depth_topic" default="aligned_depth_to_color/image_raw" />
+    <arg name="camera_info_topic" default="color/camera_info" />
+    <arg name="depth_camera_info_topic" default="depth/camera_info" />
+    <group ns="camera">
+        <node pkg="nodelet" type="nodelet" name="sim_manager" args="manager"/>
+
+        <node pkg="nodelet" type="nodelet" name="register_nodelet" args="load depth_image_proc/register sim_manager">
+            <remap from="rgb/camera_info" to="$(arg camera_info_topic)"/>
+            <remap from="depth/camera_info" to="$(arg depth_camera_info_topic)"/>
+            <remap from="depth/image_rect" to="$(arg depth_topic)"/>
+            <remap from="depth_registered/image_rect" to="$(arg aligned_depth_topic)"/>
+        </node>
+    </group>
+</launch>
