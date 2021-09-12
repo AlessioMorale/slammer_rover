@@ -5,10 +5,10 @@ services:
     build:
       context: ..
       dockerfile: docker/Dockerfile
-    image: drivers
+    image: robot-base
     network_mode: "host"
     volumes:
-      - "../../../.ccache:/root/ccache"
+      - "../../../.ccache:/ccache/ccache"
       - "../../../.docker_ws:/ros_melodic_robot/"
       - "../../../.docker_ws/.ros/:/root/.ros/"
       - "../../../src/:/ros_melodic_robot/src/"

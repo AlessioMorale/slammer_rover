@@ -4,8 +4,5 @@ services:
     extends: &extend
       file: docker-compose.base.yaml
       service: base
-    build:
-      context: ..
-      dockerfile: docker/Dockerfile
-    image: robot_builder
+    image: robot-runner
     command: /bin/bash -c "sleep infinity"

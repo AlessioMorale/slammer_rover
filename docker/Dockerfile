@@ -1,4 +1,4 @@
-FROM alessiomorale/jetson-ros-rtabmap:melodic_r32.4.4_cv4.4.0_1.2
+FROM alessiomorale/jetson-ros-rtabmap:melodic_r32.4.4_cv4.4.0_2.0.1
 # Install rtabmap & prerequisites https://github.com/introlab/rtabmap/blob/master/docker/bionic/Dockerfile
 WORKDIR /root/
 
@@ -25,7 +25,6 @@ RUN echo 'export "PATH=/usr/lib/ccache:$PATH"' >> /root/.bashrc
 RUN ldconfig
 
 # Set up entrypoint
-RUN echo "if [ -f /ros_melodic_robot/devel/setup.bash ]; then source /ros_melodic_robot/devel/setup.bash; fi" >> /init_workspaces
 RUN echo "if [ -f /ros_melodic_robot/devel/setup.bash ]; then source /ros_melodic_robot/devel/setup.bash; fi" >> /init_workspaces
 
 ARG STARTUP_PACKAGE=slammer_bringup

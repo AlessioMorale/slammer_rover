@@ -4,13 +4,12 @@ services:
     extends: &extend
       file: docker-compose.base.yaml
       service: base
-    build:
-      context: ..
-      dockerfile: docker/Dockerfile
-    image: robot_builder
+    image: robot-builder
     runtime: nvidia
 
     command: /bin/bash -c "
+      ccache -s &&
+      export PATH="/usr/lib/ccache:$PATH"
       source /init_workspaces &&
       cd /ros_melodic_robot/ &&
       ls -al &&
