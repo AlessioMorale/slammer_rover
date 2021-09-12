@@ -1,9 +1,9 @@
 
 joints:
-  - right_front_wheel
   - left_front_wheel
-  - right_rear_wheel
+  - right_front_wheel
   - left_rear_wheel
+  - right_rear_wheel
 controller_rate: 50
 
 battery_technology: 2
@@ -19,14 +19,14 @@ unav2_configuration_manager:
     pwm_frequency: 1
   encoder:
     channels: 2
-    cpr: 4096
+    cpr: 32
     has_z_index: false
-    invert0: true
+    invert0: false
     invert1: false
     position: 1
   mechanical:
-    ratio: 75.0
-    rotation0: true
+    ratio: 100.0
+    rotation0: false
     rotation1: true
   msgttl: -1
   operation:
