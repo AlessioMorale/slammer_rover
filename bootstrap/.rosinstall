@@ -26,3 +26,7 @@
     local-name: rgbd_launch
     uri: https://github.com/ros-gbp/rgbd_launch-release.git
     version: release/melodic/rgbd_launch/2.2.2-0
+- git:
+    local-name: ros_crsf_driver
+    uri: git@github.com:AlessioMorale/ros_crsf_driver.git
+    version: master
