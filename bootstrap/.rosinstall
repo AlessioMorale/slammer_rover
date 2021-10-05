@@ -29,4 +29,4 @@
 - git:
     local-name: ros_crsf_driver
     uri: git@github.com:AlessioMorale/ros_crsf_driver.git
-    version: master
+    version: main
