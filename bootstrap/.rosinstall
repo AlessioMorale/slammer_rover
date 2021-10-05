@@ -15,8 +15,8 @@
     uri: git@github.com:AlessioMorale/ros_signalling.git
     version: master
 - git:
-    local-name: rover_launch_files
-    uri: git@github.com:AlessioMorale/rover_launch_files.git
+    local-name: slammer_rover
+    uri: git@github.com:AlessioMorale/slammer_rover.git
     version: master
 - git:
     local-name: unav2_ros
