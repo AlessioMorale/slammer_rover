@@ -1,20 +1,24 @@
 <?xml version="1.0"?>
 <launch>
-  <arg name="use_crsf_joy" default="True"/>
+  <arg name="use_crsf" default="True"/>
+  <arg name="use_joy" default="False"/>
   <group ns="teleop">
 
     <!-- params -->
     <rosparam command="load" file="$(find slammer_teleop)/config/teleop.yaml" />
     
     <!-- joy implementations CRSF/Joy -->
-    <node unless="use_crsf_joy" name="joy_node" pkg="joy" type="joy_node" respawn="true" />
-    <node if="use_crsf_joy" pkg="crsf_drv" type="crsf_drv_node.py" name="crsf_joy_drv" respawn="true" />
+    <rosparam if="$(arg use_crsf)" command="load" file="$(find slammer_teleop)/config/crsf_drv.yaml" />
 
+    <node if="$(arg use_joy)" name="joy_node" pkg="joy" type="joy_node" output="screen" respawn="true" />
+    <node if="$(arg use_crsf)" pkg="crsf_drv" type="crsf_drv_node.py" name="crsf_joy_drv" output="screen" respawn="true" >
+      <remap from="/battery" to="/unav2/status/battery"/>
+    </node>
     <!-- teleop nodes -->
-    <node pkg="teleop_twist_joy" type="teleop_node" name="teleop_twist_joy" respawn="true">
+    <node pkg="teleop_twist_joy" type="teleop_node" name="teleop_twist_joy" output="screen" respawn="true">
       <remap from="cmd_vel" to="joy_teleop/cmd_vel" />
     </node>
-    <node pkg="twist_mux" type="twist_mux" name="twist_mux" respawn="true">
+    <node pkg="twist_mux" type="twist_mux" name="twist_mux" output="screen" respawn="true">
       <remap from="cmd_vel_out" to="/unav2/velocity_controller/cmd_vel" />
     </node>
   </group>

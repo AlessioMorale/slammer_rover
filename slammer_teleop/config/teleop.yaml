@@ -34,21 +34,3 @@ twist_mux:
 
 joystick_relay:
   priority: True
-
-crsf_joy_drv:
-  mapping:
-    buttons: [4, 5, 6, 7, -1]
-    axis: [0, 1, 2, 3, 5, 6, -1]
-
-  serial:
-    port: /dev/ttyUSB0
-    baudrate: 425000
-
-  joy_message_rate: 25
-
-  failsafe:
-    timeout: .5
-    buttons: [0, 0, 0, 0, 0]
-    axis: [0, 0, 0, 0, 0, 0, 0]
-
-  deadband: 0.05
