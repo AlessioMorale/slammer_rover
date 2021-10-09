@@ -2,14 +2,13 @@ version: "3.6"
 services:
   builder:
     extends: &extend
-      file: docker-compose.base.yaml
+      file: ../docker-compose.base.yaml
       service: base
     image: robot-builder
     runtime: nvidia
-
+    restart: "no"
     command: /bin/bash -c "
       ccache -s &&
-      export PATH="/usr/lib/ccache:$PATH"
       source /init_workspaces &&
       cd /ros_melodic_robot/ &&
       ls -al &&

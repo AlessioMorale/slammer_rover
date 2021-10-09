@@ -1,4 +1,7 @@
 #!/bin/bash
 cd ..
-echo building $docker_tag
-DOCKER_BUILDKIT=1 docker build -f ./docker/Dockerfile --no-cache --tag robot-image .
+DOCKER_BUILDKIT=1 docker build \
+    -f ./docker/Dockerfile \
+    --tag robot-image \
+    --progress=plain \
+    .
