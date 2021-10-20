@@ -6,7 +6,7 @@
     <arg name="depth_topic" default="/camera/aligned_depth_to_color/image_raw" />
     <arg name="rgb_topic" default="/camera/color/image_raw" />
     <arg name="camera_info_topic" default="/camera/color/camera_info" />
-    <arg name="frame_id" default="camera_link" />
+    <arg name="frame_id" default="base_link" />
 
     <arg name="odom_topic" default="/odometry/filtered" />
     <arg name="v_odom_topic" default="/odometry/vis_odom" />

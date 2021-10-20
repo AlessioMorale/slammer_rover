@@ -37,15 +37,15 @@ TebLocalPlannerROS:
     
  # Robot
          
- max_vel_x: 0.3
+ max_vel_x: 0.1
  max_vel_x_backwards: 0.01
- max_vel_theta: 0.9
+ max_vel_theta: 0.1
  acc_lim_x: 0.5
  acc_lim_theta: 0.5
  min_turning_radius: 0.0
  footprint_model: # types: "point", "circular", "two_circles", "line", "polygon"
    type: "circular"
-   radius: 0.085 # for type "circular"
+   radius: 0.15 # for type "circular"
 
 
  # GoalTolerance

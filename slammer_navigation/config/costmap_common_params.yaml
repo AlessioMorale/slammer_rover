@@ -21,7 +21,7 @@
 # THE SOFTWARE.
 #
 #
-max_obstacle_height: 0.20
+max_obstacle_height: 0.30
 
 #robot_radius: 0.085  # seems to be slower than footprint
 footprint: [[0.065, 0.065], [0.065, -0.065], [-0.065, -0.065], [-0.065, 0.065]]  # if the robot is not circular
@@ -45,12 +45,12 @@ obstacle_layer:
   observation_sources:  scan
   scan:
     data_type: PointCloud2
-    topic: rtabmap/cloud_obstacles
-    sensor_frame: base_footprint
+    topic: /rtabmap/cloud_obstacles
+    sensor_frame: base_link
     marking: true
     clearing: true
     min_obstacle_height: 0.05
-    max_obstacle_height: 0.2
+    max_obstacle_height: 0.30
 
 #cost_scaling_factor and inflation_radius were now moved to the inflation_layer ns
 inflation_layer:
