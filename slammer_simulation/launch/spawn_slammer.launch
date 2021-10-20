@@ -2,7 +2,7 @@
     <arg name="use_sim_time" default="true" />
     <arg name="gui" default="false" />
     <arg name="headless" default="true" />
-    <arg name="world_name" default="$(find gazebo_ros)/worlds/empty_world.world" />
+    <arg name="world_name" default="worlds/empty.world" />
 
     <include file="$(find gazebo_ros)/launch/empty_world.launch">
         <arg name="verbose" value="true"/>
@@ -15,7 +15,7 @@
     <include file="$(find slammer_description)/launch/description.launch">
         <arg name="sim" value ="true" />
     </include>
-    <include file="$(find slammer_control)/launch/control.launch" />
+    <include file="$(find slammer_control)/launch/controllers.launch" />
     <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" args="-urdf -model slammer -param robot_description -x 0 -y 0 -z 0 -R 0 -P 0 -Y 0" />
     <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
         <rosparam>
