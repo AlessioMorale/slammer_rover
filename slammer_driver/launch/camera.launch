@@ -2,18 +2,19 @@
     <arg name="rgb_topic" default="/camera/color/image_raw" />
     <arg name="depth_topic" default="/camera/aligned_depth_to_color/image_raw" />
     <arg name="camera_info_topic" default="/camera/color/camera_info" />
-
+    <arg name="json_file_path" default="$(find slammer_driver)/config/HighAccuracyPreset.json"/>
     <arg name="respawn" default="true" />
     <include file="$(find realsense2_camera)/launch/rs_camera.launch">
+        <arg name="json_file_path" value="$(arg json_file_path)"/>
         <arg name="align_depth" value ="true" />
         <arg name="enable_sync" value ="true" />
         <arg name="enable_pointcloud" value="false"/>
         <arg name="fisheye_fps" value="15"/>
         <arg name="depth_fps" value="15"/>
         <arg name="color_fps" value="15"/>
-        <arg name="depth_width" value="640"/>
+        <arg name="depth_width" value="848"/>
         <arg name="depth_height" value="480"/>
-        <arg name="color_width" value="640"/>
+        <arg name="color_width" value="848"/>
         <arg name="color_height" value="480"/>
     </include>
 </launch>    
