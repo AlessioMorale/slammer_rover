@@ -13,8 +13,8 @@ battery_current = 0
 battery_charge = 0
 battery_percentage = 0
 
-battery_warn_threshold = 10.9
-battery_critical_threshold = 10.6
+battery_warn_threshold = 13.2
+battery_critical_threshold = 13.0
 
 
 front = 3
@@ -34,7 +34,7 @@ color_black = [0, 0, 0]
 front_colour = front_count * [color_yellow]
 rear_colour  = 5 * [color_green] + 6  * [color_dim_white] + 5 * [color_dim_red] + [color_green]
 front_lamps_color = [16, 16, 16]
-lamp_max = 32
+lamp_max = 200
 
 lamp_batt_ok = [lamp_max, lamp_max, lamp_max]
 lamp_batt_warn = [lamp_max // 2, lamp_max, 0]
