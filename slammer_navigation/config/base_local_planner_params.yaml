@@ -22,9 +22,9 @@ aggressive_reset:
 TrajectoryPlannerROS:
   max_vel_x: 0.10
   #min_vel_x: -0.20
-  max_vel_theta: 0.1
-  #min_vel_theta: -0.3
-  min_in_place_vel_theta: 0.05
+  max_vel_theta: 0.5
+  #min_vel_theta: -0.1
+  min_in_place_vel_theta: 0.3
 
   acc_lim_theta: 0.5
   acc_lim_x: 0.5
@@ -51,7 +51,7 @@ TrajectoryPlannerROS:
   publish_cost_grid_pc: true  
 
   # Oscillation Prevention Parameters
-  oscillation_reset_dist: 0.25 #How far the robot must travel in meters before oscillation flags are reset (double, default: 0.05)
+  oscillation_reset_dist: 0.05 #How far the robot must travel in meters before oscillation flags are reset (double, default: 0.05)
   escape_reset_dist: 0.1
   escape_reset_theta: 0.1
 
@@ -67,9 +67,9 @@ DWAPlannerROS:
   min_vel_y: 0
 
   max_vel_trans: 0.1
-  min_vel_trans: -0.1
-  max_vel_theta: 0.1
-  min_vel_theta: -0.1
+#  min_vel_trans: -0.1
+  max_vel_theta: 1
+#  min_vel_theta: -0.1
 
   # Goal Tolerance Parameters
   yaw_goal_tolerance: 0.2

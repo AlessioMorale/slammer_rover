@@ -1,63 +1,68 @@
 version: "3.6"
+x-base: &x-base
+  privileged: true
+  image: robot-image
+  network_mode: "host"
+  volumes:
+    - "../../../.ccache:/ccache/ccache"
+    - "../../../.docker_ws:/ros_melodic_robot/"
+    - "../../../.docker_ws/.ros/:/root/.ros/"
+    - "../../../src/:/ros_melodic_robot/src/"
+    - "/dev:/dev"
+  restart: on-failure
+
 services:
   drivers:
-    extends: &extend
-      file: docker-compose.base.yaml
-      service: base
-    build:
-      args:
-        - STARTUP_PACKAGE=slammer_driver
-        - STARTUP_LAUNCH=driver.launch
-    image: drivers
+    <<: *x-base
+    environment:
+    - STARTUP_PACKAGE=slammer_driver
+    - STARTUP_LAUNCH=driver.launch
+    restart: unless-stopped
 
   description:
-    extends: *extend
-    build:
-      args:
-        - STARTUP_PACKAGE=slammer_description
-        - STARTUP_LAUNCH=description.launch
-    image: description
+    <<: *x-base
+    environment:
+      - STARTUP_PACKAGE=slammer_description
+      - STARTUP_LAUNCH=description.launch
+    restart: unless-stopped
+
 
   teleop:
-    extends: *extend
-    build:
-      args:
-        - STARTUP_PACKAGE=slammer_teleop
-        - STARTUP_LAUNCH=teleop.launch
-    image: teleop
+    <<: *x-base
+    environment:
+      - STARTUP_PACKAGE=slammer_teleop
+      - STARTUP_LAUNCH=teleop.launch
+    restart: unless-stopped
 
   control:
-    extends: *extend
-    build:
-      args:
-        - STARTUP_PACKAGE=slammer_control
-        - STARTUP_LAUNCH=control.launch
-    image: control
+    <<: *x-base
+    environment:
+      - STARTUP_PACKAGE=slammer_control
+      - STARTUP_LAUNCH=control.launch
     depends_on:
       - description
       - teleop
+      - drivers
+    restart: unless-stopped
+
 
   mapping:
-    extends: *extend
-
-    build:
-      args:
-        - STARTUP_PACKAGE=slammer_mapping
-        - STARTUP_LAUNCH=mapping.launch
-    image: mapping
+    <<: *x-base
+    environment:
+      - STARTUP_PACKAGE=slammer_mapping
+      - STARTUP_LAUNCH=mapping.launch
     privileged: true
     depends_on: 
       - drivers
       - control
+    restart: unless-stopped
 
   navigation:
-    extends: *extend
-
-    build:
-      args:
-        - STARTUP_PACKAGE=slammer_navigation
-        - STARTUP_LAUNCH=move_base.launch
-    image: slammer_navigation
+    <<: *x-base
+    environment:
+      - STARTUP_PACKAGE=slammer_navigation
+      - STARTUP_LAUNCH=move_base.launch
     depends_on: 
       - mapping
       - control
+    restart: unless-stopped

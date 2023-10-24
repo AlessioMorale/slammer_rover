@@ -26,11 +26,9 @@ max_obstacle_height: 0.30
 #robot_radius: 0.085  # seems to be slower than footprint
 footprint: [[-0.15, -0.10], [-0.15, 0.10], [0.15, 0.10], [0.15, -0.10]]
 
-map_type: voxel
-
 obstacle_layer:
   enabled:              true
-  max_obstacle_height:  0.2
+  max_obstacle_height:  0.3
   origin_z:             0.0
   z_resolution:         0.2
   z_voxels:             2
@@ -46,10 +44,10 @@ obstacle_layer:
   scan:
     data_type: PointCloud2
     topic: /rtabmap/cloud_obstacles
-    sensor_frame: map
+    sensor_frame: laser
     marking: true
     clearing: true
-    min_obstacle_height: 0.05
+    min_obstacle_height: 0.03
     max_obstacle_height: 0.30
 
 #cost_scaling_factor and inflation_radius were now moved to the inflation_layer ns

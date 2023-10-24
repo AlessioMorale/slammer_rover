@@ -1,0 +1,4 @@
+FROM robot-image
+ARG ROSCONSOLE_FORMAT="'[\${node} | \${severity} | \${time}]: \${message}'"
+ENV ROSCONSOLE_FORMAT=$ROSCONSOLE_FORMAT
+CMD [ "/bin/bash", "-c", "source /init_workspaces && roslaunch ${STARTUP_PACKAGE} ${STARTUP_LAUNCH} --wait"]

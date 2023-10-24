@@ -5,7 +5,7 @@ crsf_joy_drv:
 
   serial:
     port: /dev/serial/by-path/platform-70090000.xusb-usb-0:2.4.4:1.0-port0
-    baudrate: 440000
+    baudrate: 115200
 
   joy_message_rate: 25
 

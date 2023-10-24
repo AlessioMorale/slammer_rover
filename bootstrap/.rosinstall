@@ -5,11 +5,11 @@
 - git:
     local-name: librealsense
     uri: https://github.com/IntelRealSense/librealsense.git
-    version: master
+    version: 0fa6c4f1a000059cbb80a09ee5efa54b281b22c0
 - git:
     local-name: realsense
     uri: https://github.com/IntelRealSense/realsense-ros.git
-    version: development
+    version: 3e659d8a2b4db69d7f9eac9d5affc0bcb94e92b8
 - git:
     local-name: ros_signalling
     uri: git@github.com:AlessioMorale/ros_signalling.git

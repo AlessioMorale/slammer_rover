@@ -2,9 +2,9 @@ version: "3.6"
 services:
   builder:
     extends: &extend
-      file: ../docker-compose.base.yaml
-      service: base
-    image: robot-builder
+      file: ../docker-compose.yaml
+      service: drivers
+    image: robot-image
     runtime: nvidia
     restart: "no"
     command: /bin/bash -c "
@@ -17,5 +17,4 @@ services:
       catkin clean -y &&
       time catkin build --no-status --interleave
       "
-    
 

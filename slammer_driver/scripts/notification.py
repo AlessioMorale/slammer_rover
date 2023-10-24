@@ -34,7 +34,7 @@ color_black = [0, 0, 0]
 front_colour = front_count * [color_yellow]
 rear_colour  = 5 * [color_green] + 6  * [color_dim_white] + 5 * [color_dim_red] + [color_green]
 front_lamps_color = [16, 16, 16]
-lamp_max = 200
+lamp_max = 255
 
 lamp_batt_ok = [lamp_max, lamp_max, lamp_max]
 lamp_batt_warn = [lamp_max // 2, lamp_max, 0]

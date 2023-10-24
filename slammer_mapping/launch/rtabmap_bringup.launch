@@ -44,7 +44,7 @@
     <arg name="namespace"               default="rtabmap"/>
     <arg name="database_path"           default="~/.ros/rtabmap.db"/>
     <arg name="queue_size"              default="10"/>
-    <arg name="wait_for_transform"      default="0.2"/>
+    <arg name="wait_for_transform"      default="0.5"/>
     <arg name="args"                    default=""/>              <!-- delete_db_on_start, udebug -->
     <arg name="rtabmap_args"            default="$(arg args)"/>   <!-- deprecated, use "args" argument -->
     <arg name="gdb"                     default="false"/>         <!-- Launch nodes in gdb for debugging (apt install xterm gdb) -->
@@ -115,7 +115,7 @@
     <arg name="scan_cloud_assembling"              default="false"/>
     <arg name="scan_cloud_assembling_time"         default="1"/>
     <arg name="scan_cloud_assembling_fixed_frame"  default=""/>
-    <arg name="scan_cloud_assembling_voxel_size"   default="0.05"/>
+    <arg name="scan_cloud_assembling_voxel_size"   default="0.025"/>
     <arg name="scan_cloud_assembling_noise_radius"   default="0.0"/>    <!-- 0=disabled -->
     <arg name="scan_cloud_assembling_noise_min_neighbors"   default="5"/>
     
@@ -357,6 +357,20 @@
         <param     if="$(arg localization)" name="Mem/IncrementalMemory" type="string" value="false"/>
         <param unless="$(arg localization)" name="Mem/IncrementalMemory" type="string" value="true"/>
         <param name="Mem/InitWMWithAllNodes" type="string" value="$(arg localization)"/>
+      <param name="RGBD/NeighborLinkRefining" type="string" value="true"/>
+      <param name="RGBD/ProximityBySpace"     type="string" value="true"/>
+      <param name="RGBD/AngularUpdate"        type="string" value="0.01"/>
+      <param name="RGBD/LinearUpdate"         type="string" value="0.01"/>
+      <param name="RGBD/OptimizeFromGraphEnd" type="string" value="false"/>
+      <param name="Grid/FromDepth"            type="string" value="true"/> <!-- occupancy grid from lidar -->
+      <param name="Grid/MinGroundHeight" type="string" value="0.05"/>
+      <param name="Grid/MaxGroundHeight" type="string" value="0.40"/>
+      <param name="Reg/Force3DoF"             type="string" value="true"/>
+      <param name="Reg/Strategy"              type="string" value="1"/> <!-- 1=ICP -->
+      
+      <!-- ICP parameters -->
+      <param name="Icp/VoxelSize"                 type="string" value="0.05"/>
+      <param name="Icp/MaxCorrespondenceDistance" type="string" value="0.1"/>
       </node>
     
       <!-- Visualisation RTAB-Map -->

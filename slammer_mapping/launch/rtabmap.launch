@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <launch>
-    <arg name="use_rviz" default="true" />
-    <arg name="use_rtabmapviz" default="true" />
+    <arg name="use_rviz" default="false" />
+    <arg name="use_rtabmapviz" default="false" />
 
     <arg name="depth_topic" default="/camera/aligned_depth_to_color/image_raw" />
     <arg name="rgb_topic" default="/camera/color/image_raw" />
@@ -15,15 +15,17 @@
     <arg name="odom_frame" default="odom" />
 
     <include file="$(find slammer_mapping)/launch/rtabmap_bringup.launch">
+        <arg name="subscribe_scan" value="true" />
         <arg name="rtabmap_args" value="--delete_db_on_start" />
         <arg name="depth_topic" value="$(arg depth_topic)" />
         <arg name="frame_id" value="$(arg frame_id)" />
-        <arg name="visual_odometry" value="true" />
+        <arg name="visual_odometry" value="false" />
+        <arg name="icp_odometry" value="true" />
         <arg name="odom_frame_id" value="$(arg odom_frame)" />
         <arg name="visual_odom_topic" default="$(arg v_odom_topic)" />
         <arg name="rgb_topic" value="$(arg rgb_topic)" />
         <arg name="camera_info_topic" value="$(arg camera_info_topic)" />
-        <arg name="queue_size" value="200" />
+        <arg name="queue_size" value="20" />
         <arg name="rviz" value="$(arg use_rviz)" />
         <arg name="rtabmapviz" value="$(arg use_rtabmapviz)" />
         <arg name="publish_tf_odom" default="false" />
